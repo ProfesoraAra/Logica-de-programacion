@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica de Programación</title>
+    <!-- Carga de Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de color para el tema UCA (usando tonos del logo) y fuente Inter --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', // Tono vino/bordo del logo (Guinda)
+                        'uca-secondary': '#ad9348', // Tono dorado del logo
+                        'uca-light': '#fefcf8',
+                        'uca-beige': '#f0e8d9', // Fondo beige
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Eliminamos el estilo .header-bg ya que ahora es blanco */
+        /* Clase para iconos/decoración */
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: '#5c1b35';
+            color: '#fff';
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        /* Estilo de transición para los módulos colapsables */
+        .collapse-content {
+            transition: all 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .collapse-content.active {
+            max-height: 700px; /* Aumentado para dar espacio a los nuevos enlaces */
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-uca-beige font-sans text-gray-800">
+
+    <!-- Encabezado y Navegación (AHORA BEIGE - FIJO AL SCROLL) --><header class="bg-uca-beige shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <!-- Logo Institucional --><div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="https://www.rcastellanos.cdmx.gob.mx/storage/app/media/uploaded-files/logotipo-04.png" 
+                     alt="Logo Universidad Rosario Castellanos" 
+                     class="h-10 w-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=Logo';"
+                >
+            </div>
+
+            <!-- Título del Curso (Ahora solo texto con padding) --><h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Lógica de Programación
+            </h1>
+            
+            <!-- Botón de Acción (Guinda) --><a href="#modulos" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Ver Módulos
+            </a>
+        </div>
+    </header>
+
+    <!-- Sección Introductoria (Ajustada a fondo blanco para contraste) --><section class="py-16 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:space-x-12">
+            <!-- Texto de Bienvenida --><div class="lg:w-2/3 mb-8 lg:mb-0">
+                <h2 class="text-3xl font-extrabold text-uca-primary mb-4">
+                    ¡Bienvenidos al Curso!
+                </h2>
+                <p class="text-lg text-gray-600 mb-4">
+                    Este curso te proporcionará las bases fundamentales para desarrollar un pensamiento algorítmico y estructurado, esencial para cualquier lenguaje de programación. Aprenderás desde la abstracción de problemas hasta la implementación de código limpio y reutilizable.
+                </p>
+                <p class="text-base text-gray-500 italic">
+                    "La programación es el arte de convertir los problemas complejos en secuencias lógicas y elegantes."
+                </p>
+            </div>
+            
+            <!-- Imagen Representativa --><div class="lg:w-1/3 flex justify-center">
+                <img src="imagenes/logica-programación.png" 
+                     alt="Ilustración de código, diagramas de flujo y elementos de programación" 
+                     class="rounded-xl shadow-2xl transition duration-500 hover:shadow-uca-primary/50"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x250/5c1b35/fefcf8?text=Lógica+de+Programación';"
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Módulos (Contenido Principal) --><section id="modulos" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-uca-primary mb-12">
+                Estructura del Curso
+            </h2>
+
+            <div class="space-y-6">
+                
+                <!-- Módulo 1 (Círculo guinda) --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-uca-secondary/50">
+                    <button class="w-full text-left p-6 flex items-center justify-between focus:outline-none" 
+                            data-module="module-1">
+                        <div class="flex items-center space-x-4">
+                            <span class="icon-circle bg-uca-primary text-white">1</span>
+                            <span class="text-xl sm:text-2xl font-semibold text-uca-primary">Módulo 1. Fundamentos del pensamiento computacional</span>
+                        </div>
+                        <svg class="w-6 h-6 transform transition duration-300" data-arrow="module-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="collapse-content" id="module-1">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <!-- OBJETIVO MÓDULO 1 --><p class="mb-4 text-gray-700 font-semibold">
+                                <strong>Objetivo:</strong> Reconocer la trayectoria histórica y el impacto actual de la programación, así como del desarrollo de algoritmos, resaltando su utilidad y aplicación en situaciones cotidianas, con el fin de analizar su papel en la resolución efectiva de problemas, la mejora de procesos en la vida diaria de las personas y empresas.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600 ml-4">
+                                <li>1.1 Introducción al pensamiento computacional.</li>
+                                <li>1.2 Conceptos Básicos de algoritmos y su propósito.</li>
+                                <li>1.3 Herramientas de representación de algoritmos: pseudocódigo y diagrama de flujo.</li>
+                                <li>1.4 Primeros pasos en el diseño lógico para la resolución de problemas: lógica simple y clara.</li>
+                                <li>1.5 Uso de ejemplos prácticos: problemas cotidianos básicos.</li>
+                            </ul>
+                            
+                            <!-- Material de Apoyo Módulo 1 (Ambos PDF) --><div class="mt-6 border-t pt-4 border-uca-secondary/30">
+                                <h4 class="text-lg font-bold text-uca-primary mb-3">Material de Apoyo</h4>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="introduccion-pensamiento-computacional.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Introducción al pensamiento computacional
+                                    </a>
+                                    <a href="conceptos-basicos.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Conceptos básicos de la lógica de programación
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-sm text-right text-uca-primary font-medium">
+                                ¡Inicia tu viaje algorítmico!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 2 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-uca-secondary/50">
+                    <button class="w-full text-left p-6 flex items-center justify-between focus:outline-none" 
+                            data-module="module-2">
+                        <div class="flex items-center space-x-4">
+                            <span class="icon-circle bg-uca-primary text-white">2</span>
+                            <span class="text-xl sm:text-2xl font-semibold text-uca-primary">Módulo 2. Lógica computacional y control de flujo</span>
+                        </div>
+                        <svg class="w-6 h-6 transform transition duration-300" data-arrow="module-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="collapse-content" id="module-2">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <!-- OBJETIVO MÓDULO 2 --><p class="mb-4 text-gray-700 font-semibold">
+                                <strong>Objetivo:</strong> Identificar los principios de la lógica computacional y el control de flujo mediante el uso de tipos de datos, variables, operadores y estructuras de decisión y repetición, con el fin de construir pseudocódigo de manera lógica y estructurada a partir de un algoritmo.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600 ml-4">
+                                <li>2.1 Conceptos fundamentales (variables, constantes, operadores).</li>
+                                <li>2.2 Diseño lógico para la resolución de problemas (uso de operadores lógicos).</li>
+                            </ul>
+                            
+                            <!-- Material de Apoyo Módulo 2 (Ambos PDF) --><div class="mt-6 border-t pt-4 border-uca-secondary/30">
+                                <h4 class="text-lg font-bold text-uca-primary mb-3">Material de Apoyo</h4>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Conceptos fundamentales
+                                    </a>
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Diseño lógico para la resolución de problemas
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-sm text-right text-uca-primary font-medium">
+                                Controla el camino de tu código.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 3 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-uca-secondary/50">
+                    <button class="w-full text-left p-6 flex items-center justify-between focus:outline-none" 
+                            data-module="module-3">
+                        <div class="flex items-center space-x-4">
+                            <span class="icon-circle bg-uca-primary text-white">3</span>
+                            <span class="text-xl sm:text-2xl font-semibold text-uca-primary">Módulo 3. Estructuras de control</span>
+                        </div>
+                        <svg class="w-6 h-6 transform transition duration-300" data-arrow="module-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="collapse-content" id="module-3">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <!-- OBJETIVO MÓDULO 3 --><p class="mb-4 text-gray-700 font-semibold">
+                                <strong>Objetivo:</strong> Aplicar estructuras de control en la construcción de algoritmos mediante el uso de expresiones lógicas, validaciones y ciclos con el fin de desarrollar pseudocódigo funcional que permita automatizar tareas repetitivas, controlar el flujo del programa y tomar decisiones de manera estructurada, eficiente y adaptable.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600 ml-4">
+                                <li>3.1 Estructuras de control condicionales (`if-else`, anidadas, `switch`).</li>
+                                <li>3.2 Estructuras de control repetitivas (`for`, `while`, `do-while`).</li>
+                            </ul>
+                            
+                            <!-- Material de Apoyo Módulo 3 (Ambos PDF) --><div class="mt-6 border-t pt-4 border-uca-secondary/30">
+                                <h4 class="text-lg font-bold text-uca-primary mb-3">Material de Apoyo</h4>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Estructuras de control condicionales
+                                    </a>
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Estructuras de control repetitivas
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-sm text-right text-uca-primary font-medium">
+                                Organiza tu código como un profesional.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 4 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-uca-secondary/50">
+                    <button class="w-full text-left p-6 flex items-center justify-between focus:outline-none" 
+                            data-module="module-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="icon-circle bg-uca-primary text-white">4</span>
+                            <span class="text-xl sm:text-2xl font-semibold text-uca-primary">Módulo 4. Buenas prácticas y reutilización de código</span>
+                        </div>
+                        <svg class="w-6 h-6 transform transition duration-300" data-arrow="module-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="collapse-content" id="module-4">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <!-- OBJETIVO MÓDULO 4 --><p class="mb-4 text-gray-700 font-semibold">
+                                <strong>Objetivo:</strong> Comprender la importancia de las buenas prácticas, la reutilización de código y de la modularidad en la programación y aplicar estrategias para dividir problemas en subproblemas, diseñando funciones modulares que permitan resolverlos de manera estructurada y eficiente.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600 ml-4">
+                                <li>4.1 Prácticas para la modularización del código (funciones y procedimientos).</li>
+                                <li>4.2 Identificación de subproblemas.</li>
+                                <li>4.3 Diseño modular y su importancia en la programación.</li>
+                                <li>4.4 Beneficios del diseño modular en la programación.</li>
+                            </ul>
+
+                            <!-- Material de Apoyo Módulo 4 (Ambos PDF) --><div class="mt-6 border-t pt-4 border-uca-secondary/30">
+                                <h4 class="text-lg font-bold text-uca-primary mb-3">Material de Apoyo</h4>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Diseño modular y su importancia en la programación
+                                    </a>
+                                    <a href="en-construcción.html" class="flex items-center text-uca-secondary hover:underline transition duration-200">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Beneficios del diseño modular en la programación
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-sm text-right text-uca-primary font-medium">
+                                Escribe código que otros amarán.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página (Footer) --><footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                UCA: Lógica de programación
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lógica de Interacción (Acordeón) --><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const moduleButtons = document.querySelectorAll('[data-module]');
+
+            moduleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const moduleId = button.getAttribute('data-module');
+                    const content = document.getElementById(moduleId);
+                    const arrow = document.querySelector(`[data-arrow="${moduleId}"]`);
+
+                    // Alternar la clase 'active' para expandir/colapsar
+                    content.classList.toggle('active');
+
+                    // Alternar la rotación de la flecha
+                    if (content.classList.contains('active')) {
+                        arrow.classList.add('rotate-180');
+                    } else {
+                        arrow.classList.remove('rotate-180');
+                    }
+
+                    // Cerrar otros módulos al abrir uno nuevo
+                    document.querySelectorAll('.collapse-content.active').forEach(otherContent => {
+                        if (otherContent.id !== moduleId) {
+                            otherContent.classList.remove('active');
+                            const otherArrow = document.querySelector(`[data-arrow="${otherContent.id}"]`);
+                            if (otherArrow) {
+                                otherArrow.classList.remove('rotate-180');
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

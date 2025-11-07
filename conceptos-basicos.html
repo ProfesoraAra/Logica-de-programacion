@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción al Pensamiento Computacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35',
+                        'uca-secondary': '#ad9348',
+                        'uca-light': '#fefcf8',
+                        'uca-beige': '#f0e8d9',
+                        'uca-guinda-light': '#8b3a5a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .flowchart-step {
+            min-width: 150px;
+            flex-basis: 18%;
+        }
+    </style>
+</head>
+<body id="top" class="bg-uca-beige font-sans text-gray-800">
+
+        <!-- El encabezado ahora es sticky, top-0 y z-10 para que quede fijo y encima del contenido -->
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                     alt="Logo Universidad Rosario Castellanos" 
+                     class="h-10 w-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Conceptos básicos de la lógica de programación
+            </h1>
+            </h1>
+            
+            <!-- Botón de Acción Inicio (Guinda) -->
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl p-4 md:p-8">
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8 border-t-4 border-uca-secondary">
+            <h3 class="text-2xl font-bold text-center text-uca-primary mb-6">Conceptos Básicos: El Algoritmo</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="text-gray-700 space-y-4">
+                    <p class="text-lg">Un algoritmo es el corazón del <strong class="text-uca-primary">pensamiento computacional</strong>. Es una receta, un conjunto de instrucciones precisas, ordenadas y finitas diseñadas para resolver un problema específico. </p>
+                    <p>Su propósito es simple pero poderoso: <strong class="text-uca-primary">garantizar un resultado correcto</strong> de manera consistente y eficiente, proporcionando un plan claro que una computadora (o una persona) pueda seguir sin ambigüedades.</p>
+                </div>
+                <div>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-2 font-medium">Características de un Algoritmo Ideal</p>
+                </div>
+            </div>
+            <p class="text-center text-gray-700 mt-6 text-lg">Un algoritmo debe ser <strong class="text-uca-primary">preciso</strong> (sin ambigüedad), <strong class="text-uca-primary">ordenado</strong> (secuencia correcta), <strong class="text-uca-primary">finito</strong> (debe terminar), <strong class="text-uca-primary">definido</strong> (mismas entradas, misma salida) y <strong class="text-uca-primary">efectivo</strong> (pasos realizables).</p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8 border-t-4 border-uca-primary">
+            <h3 class="text-2xl font-bold text-center text-uca-primary mb-6">Primeros Pasos en el Diseño Lógico</h3>
+            <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-8">Antes de escribir una sola línea de código, el paso crucial es el <strong class="text-uca-primary">diseño lógico</strong>. Se descompone en tres fases fundamentales, asegurando una lógica simple y clara.</p>
+            
+            <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flex flex-col items-center text-center">
+                    <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">1. Análisis del Problema</div>
+                    <p class="mt-2 text-gray-600 max-w-xs">Definir claramente: ¿cuáles son las entradas, procesos y salidas?</p>
+                </div>
+                
+                <div class="flow-arrow md:hidden">&darr;</div>
+                <div class="flow-arrow hidden md:block text-uca-secondary">&rarr;</div>
+                
+                <div class="flex flex-col items-center text-center">
+                    <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">2. Diseño de la Lógica</div>
+                    <p class="mt-2 text-gray-600 max-w-xs">Crear el "mapa" de la solución usando pseudocódigo o diagramas de flujo.</p>
+                </div>
+                
+                <div class="flow-arrow md:hidden">&darr;</div>
+                <div class="flow-arrow hidden md:block text-uca-secondary">&rarr;</div>
+                
+                <div class="flex flex-col items-center text-center">
+                    <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">3. Prueba de Escritorio</div>
+                    <p class="mt-2 text-gray-600 max-w-xs">Simular el algoritmo manualmente para verificar su claridad y validez.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-center text-uca-primary mb-6">Herramientas para una Lógica Clara</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-uca-secondary">
+                    <h4 class="text-xl font-bold text-uca-primary mb-3 text-center">Pseudocódigo</h4>
+                    <p class="text-gray-700">Describe la lógica usando un <strong class="text-gray-900">lenguaje natural sencillo</strong> con estructuras de control de programación. Es el puente directo al código.</p>
+                    <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong class="text-uca-secondary">Ventaja:</strong> Rápido de escribir y fácil de convertir a cualquier lenguaje.</li>
+                        <li><strong class="text-uca-secondary">Propósito:</strong> Esbozar la secuencia y lógica principal.</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-uca-primary">
+                    <h4 class="text-xl font-bold text-uca-primary mb-3 text-center">Diagramas de Flujo</h4>
+                    <p class="text-gray-700">Es una <strong class="text-gray-900">representación gráfica</strong> del algoritmo. Utiliza símbolos estándar (IEEE) para visualizar el flujo de control.</p>
+                    <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong class="text-uca-secondary">Ventaja:</strong> Facilita la comprensión visual de las decisiones y repeticiones.</li>
+                        <li><strong class="text-uca-secondary">Propósito:</strong> Verificar la estructura lógica y la claridad del flujo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8 bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-secondary">
+            <h3 class="text-2xl font-bold text-center text-uca-primary mb-6">Ejemplo Práctico: Sumar Dos Números</h3>
+            <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-8">Aplicando la lógica: cómo se representa la secuencia simple de Entrada, Proceso, Salida.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-uca-light rounded-lg shadow-inner p-6">
+                    <h4 class="text-xl font-bold text-uca-guinda-light mb-4 text-center">Representación en Pseudocódigo</h4>
+                    <pre class="bg-gray-100 p-4 rounded-lg text-left text-gray-800 font-mono text-base overflow-x-auto border border-uca-secondary">
+INICIO
+  DEFINIR num1, num2, suma COMO NÚMERO
+  
+  ESCRIBIR "Introduce el primer número:"
+  LEER num1
+  
+  ESCRIBIR "Introduce el segundo número:"
+  LEER num2
+  
+  suma = num1 + num2
+  
+  ESCRIBIR "La suma es: ", suma
+FIN
+                    </pre>
+                </div>
+                <div class="bg-uca-light rounded-lg shadow-inner p-6">
+                    <h4 class="text-xl font-bold text-uca-guinda-light mb-4 text-center">Representación en Diagrama de Flujo</h4>
+                    <div class="flex flex-col items-center space-y-1">
+                        <div class="flow-shape flow-terminal">INICIO</div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-shape flow-io"><div class="flow-io-content">LEER num1</div></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-shape flow-io"><div class="flow-io-content">LEER num2</div></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-shape flow-process bg-uca-primary text-uca-light border-uca-primary">suma = num1 + num2</div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-shape flow-io"><div class="flow-io-content">ESCRIBIR suma</div></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-shape flow-terminal">FIN</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-uca-primary py-8 mt-12 text-center rounded-lg shadow-xl">
+            <h3 class="text-2xl font-bold text-uca-light mb-4">La Lógica como Fundamento de las TIC</h3>
+            <p class="text-lg text-uca-light max-w-3xl mx-auto opacity-90">Dominar estos fundamentos es esencial. Una <strong class="text-uca-secondary">lógica clara y bien diseñada</strong> es la base de un programa funcional, mantenible y libre de errores. El código es solo la traducción final de un pensamiento bien estructurado.</p>
+        </footer>
+
+    </main>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // NO SVG, NO MERMAID JS USED
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+        
+        const chartColors = {
+            primary: '#5c1b35', // Guinda
+            secondary: '#ad9348', // Dorado
+            bg: 'rgba(92, 27, 53, 0.2)' // Guinda Transparente
+        };
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('radarChart')?.getContext('2d');
+            
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Preciso', 'Ordenado', 'Finito', 'Definido', 'Efectivo'],
+                        datasets: [{
+                            label: 'Algoritmo Ideal',
+                            data: [100, 100, 100, 100, 100],
+                            backgroundColor: chartColors.bg,
+                            borderColor: chartColors.secondary, // Dorado
+                            borderWidth: 2,
+                            pointBackgroundColor: chartColors.secondary,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: chartColors.secondary
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(92, 27, 53, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(92, 27, 53, 0.1)'
+                                },
+                                pointLabels: {
+                                    font: {
+                                        size: 13,
+                                        weight: '700',
+                                        family: 'Inter'
+                                    },
+                                    color: chartColors.primary
+                                },
+                                ticks: {
+                                    backdropColor: '#f0e8d9', // UCA Beige
+                                    color: chartColors.primary,
+                                    stepSize: 25,
+                                    font: {
+                                        size: 10
+                                    }
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: chartColors.primary,
+                                    font: {
+                                        size: 14,
+                                        weight: '500',
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

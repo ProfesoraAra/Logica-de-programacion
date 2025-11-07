@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página en Construcción - Lógica de Programación</title>
+    <!-- Carga de Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de color para el tema UCA (usando tonos del logo) y fuente Inter --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', // Tono vino/bordo del logo (Guinda)
+                        'uca-secondary': '#ad9348', // Tono dorado del logo
+                        'uca-light': '#fefcf8',
+                        'uca-beige': '#f0e8d9', // Fondo beige
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-uca-beige font-sans text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Encabezado -->
+    <header class="bg-uca-beige shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <!-- Logo Institucional -->
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                     alt="Logo Universidad Rosario Castellanos" 
+                     class="h-10 w-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=Logo';"
+                >
+            </div>
+
+            <!-- Título del Curso -->
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Lógica de Programación
+            </h1>
+            
+            <!-- Espacio vacío para mantener la estructura de 'justify-between' -->
+            <div class="w-full md:w-auto text-center md:text-right">
+                <!-- Espacio mantenido -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Página en Construcción -->
+    <main class="flex-grow flex items-center justify-center p-8 bg-white/70">
+        <div class="max-w-4xl w-full bg-white rounded-xl shadow-2xl p-10 sm:p-16 text-center border-t-8 border-uca-secondary">
+            
+            <!-- Icono de Construcción (🛠️) -->
+            <div class="text-6xl mb-6 text-uca-secondary">
+                <svg class="w-16 h-16 mx-auto text-uca-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+
+            <!-- Título Principal -->
+            <h2 class="text-5xl font-extrabold text-uca-primary mb-4">
+                ¡Estamos en Mantenimiento!
+            </h2>
+
+            <!-- Mensaje con <strong> -->
+            <p class="text-xl text-gray-600 mb-8">
+                Estamos trabajando arduamente en la sección que intentas visitar. 
+                Pronto estará lista con <strong>nuevo material y recursos interactivos</strong> para tu aprendizaje.
+            </p>
+
+            <!-- Indicador de Progreso (barra simulada) -->
+            <div class="w-full bg-uca-beige rounded-full h-4 mb-8">
+                <div class="bg-uca-primary h-4 rounded-full" style="width: 75%; transition: width 1s;"></div>
+            </div>
+            <p class="text-sm font-semibold text-uca-primary mb-8">Progreso actual: 75%</p>
+
+
+            <!-- Enlace de Retorno -->
+            <a href="index.html" class="inline-flex items-center bg-uca-primary hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                Volver a la Página Principal
+            </a>
+
+        </div>
+    </main>
+    
+    <!-- Pie de Página (Footer) -->
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                UCA: Lógica de programación
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

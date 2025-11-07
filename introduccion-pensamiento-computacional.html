@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción al Pensamiento Computacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35',
+                        'uca-secondary': '#ad9348',
+                        'uca-light': '#fefcf8',
+                        'uca-beige': '#f0e8d9',
+                        'uca-guinda-light': '#8b3a5a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .flowchart-step {
+            min-width: 150px;
+            flex-basis: 18%;
+        }
+    </style>
+</head>
+<body id="top" class="bg-uca-beige font-sans text-gray-800">
+    <!-- NO SVG, NO MERMAID JS USED -->
+
+    <body id="top" class="bg-uca-beige font-sans text-gray-800">
+    <!-- NO SVG, NO MERMAID JS USED -->
+
+    <!-- El encabezado ahora es sticky, top-0 y z-10 para que quede fijo y encima del contenido -->
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                     alt="Logo Universidad Rosario Castellanos" 
+                     class="h-10 w-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Introducción al Pensamiento Computacional
+            </h1>
+            
+            <!-- Botón de Acción Inicio (Guinda) -->
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <section class="py-8 px-4 sm:px-6 lg:px-8 bg-white rounded-xl shadow-xl border-t-4 border-uca-secondary">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:space-x-12">
+                <div class="lg:w-full mb-4 lg:mb-0">
+                    <h2 class="text-3xl font-extrabold text-uca-primary mb-4">
+                        El Origen de la Solución de Problemas en TIC
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-4">
+                        El Pensamiento Computacional (PC) es la habilidad fundamental que transforma problemas complejos de la vida real en soluciones algorítmicas, siendo la piedra angular de tu formación en la Licenciatura en TIC. No se trata de programar, sino de <strong>pensar de forma estructurada</strong> para que el código sea solo el paso final.
+                    </p>
+                    <blockquote class="border-l-4 border-uca-secondary pl-4 py-2 bg-gray-50 text-lg text-gray-700 italic">
+                        "El Pensamiento Computacional es una habilidad fundamental para todos, no sólo para los científicos de la computación."
+                        <span class="block text-right text-base not-italic text-uca-secondary mt-2">— Jeannette Wing, 2006</span>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <section id="pilares" class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="md:col-span-2 bg-white rounded-xl shadow-xl p-6 md:p-8 border-t-4 border-uca-primary">
+                <h2 class="text-3xl font-bold text-uca-primary mb-6 text-center">Los 4 Pilares Esenciales del Pensamiento Computacional</h2>
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    Estos cuatro conceptos interconectados son las herramientas cognitivas que utilizas para abordar cualquier desafío, desde ordenar una base de datos hasta diseñar una red. El gráfico de dona ilustra su peso conceptual en el proceso.
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                    <div class="chart-container">
+                        <canvas id="pillarsChart"></canvas>
+                    </div>
+                    <div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-uca-primary text-white font-bold rounded-full flex items-center justify-center mr-4">1</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-uca-primary">Decomposición</h3>
+                                    <p class="text-gray-700">Dividir un problema grande y complejo en piezas más pequeñas, lo que permite resolver cada parte individualmente.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-uca-secondary text-white font-bold rounded-full flex items-center justify-center mr-4">2</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-uca-secondary">Reconocimiento de Patrones</h3>
+                                    <p class="text-gray-700">Identificar similitudes, tendencias o regularidades en la solución de problemas previos o dentro de las subpartes del problema actual.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-uca-guinda-light text-white font-bold rounded-full flex items-center justify-center mr-4">3</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-uca-guinda-light">Abstracción</h3>
+                                    <p class="text-gray-700">Filtrar los detalles innecesarios y enfocarse solo en la información crítica para diseñar la solución más eficiente.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-gray-700 text-white font-bold rounded-full flex items-center justify-center mr-4">4</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-700">Algoritmos</h3>
+                                    <p class="text-gray-700">Desarrollar la secuencia precisa, finita y ordenada de pasos (instrucciones) para resolver el problema.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-xl shadow-xl p-6 md:p-8 mt-6 border-t-4 border-uca-secondary">
+                <h2 class="text-3xl font-bold text-uca-primary mb-6 text-center">Proceso de Diseño Lógico para la Resolución de Problemas</h2>
+                <p class="text-lg text-gray-700 mb-8 text-center">
+                    Este flujo representa los pasos que transforman una idea o necesidad en una solución codificable. La lógica es el puente entre el problema y el programa final.
+                </p>
+                <!-- Ajuste del flujo para una sola línea en lg, y pasos más pequeños -->
+                <div class="flex flex-col lg:flex-row lg:flex-nowrap justify-between items-center gap-y-4 lg:gap-x-2 text-center">
+                    <div class="flowchart-step bg-uca-primary text-white p-3 rounded-lg shadow-lg flex flex-col justify-center items-center h-24 w-full lg:w-1/5">
+                        <span class="text-2xl font-bold block mb-1">1</span>
+                        <span class="text-xs font-medium">Definir el Problema</span>
+                    </div>
+                    <div class="flow-arrow-mobile lg:rotate-0 text-3xl text-uca-secondary font-bold flex-shrink-0">→</div>
+                    <div class="flowchart-step bg-uca-primary text-white p-3 rounded-lg shadow-lg flex flex-col justify-center items-center h-24 w-full lg:w-1/5">
+                        <span class="text-2xl font-bold block mb-1">2</span>
+                        <span class="text-xs font-medium">Analizar Requisitos</span>
+                    </div>
+                    <div class="flow-arrow-mobile lg:rotate-0 text-3xl text-uca-secondary font-bold flex-shrink-0">→</div>
+                    <div class="flowchart-step bg-uca-primary text-white p-3 rounded-lg shadow-lg flex flex-col justify-center items-center h-24 w-full lg:w-1/5">
+                        <span class="text-2xl font-bold block mb-1">3</span>
+                        <span class="text-xs font-medium">Diseñar el Algoritmo</span>
+                    </div>
+                    <div class="flow-arrow-mobile lg:rotate-0 text-3xl text-uca-secondary font-bold flex-shrink-0">→</div>
+                    <div class="flowchart-step bg-uca-primary text-white p-3 rounded-lg shadow-lg flex flex-col justify-center items-center h-24 w-full lg:w-1/5">
+                        <span class="text-2xl font-bold block mb-1">4</span>
+                        <span class="text-xs font-medium">Implementar (Pseudocódigo)</span>
+                    </div>
+                    <div class="flow-arrow-mobile lg:rotate-0 text-3xl text-uca-secondary font-bold flex-shrink-0">→</div>
+                    <div class="flowchart-step bg-uca-primary text-white p-3 rounded-lg shadow-lg flex flex-col justify-center items-center h-24 w-full lg:w-1/5">
+                        <!-- Paso 5 ajustado y reducido -->
+                        <span class="text-2xl font-bold block mb-1">5</span>
+                        <span class="text-xs font-medium">Generar y Probar Código</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-2">
+                <h2 class="text-3xl font-bold text-uca-primary mb-6 text-center">Herramientas de Representación Clave</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-uca-secondary">
+                        <h3 class="text-2xl font-bold text-uca-primary mb-3">El Algoritmo</h3>
+                        <p class="text-gray-700 mb-4">La esencia de la solución. Una serie de pasos que debe ser precisa, definida (siempre da el mismo resultado) y finita (siempre termina).</p>
+                        <p class="text-sm text-uca-secondary font-medium">Conceptos Básicos: Entrada, Proceso, Salida.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-uca-secondary">
+                        <h3 class="text-2xl font-bold text-uca-primary mb-3">Diagramas de Flujo</h3>
+                        <p class="text-gray-700">Representación gráfica de la secuencia de pasos. Usa símbolos estándar IEEE para inicio, proceso, decisión y flujo de control, facilitando la comprensión visual.</p>
+                        <p class="text-sm text-uca-secondary font-medium">Utilidad: Claridad en el flujo de decisiones.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-uca-secondary">
+                        <h3 class="text-2xl font-bold text-uca-primary mb-3">Pseudocódigo</h3>
+                        <p class="text-gray-700">Un puente entre el lenguaje natural y el lenguaje de programación. Describe el algoritmo usando estructuras de programación sin depender de una sintaxis específica.</p>
+                        <p class="text-sm text-uca-secondary font-medium">Ventaja: Fácil de convertir a cualquier lenguaje.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-xl shadow-xl p-6 md:p-8 mt-6 border-t-4 border-uca-primary">
+                <h2 class="text-3xl font-bold text-uca-primary mb-4 text-center">Relevancia del PC en las Áreas de TIC</h2>
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    El dominio de la lógica algorítmica y la resolución de problemas es crucial, sin importar tu camino de especialización. Este radar muestra cómo las habilidades del PC son esenciales en diversas ramas de la tecnología.
+                </p>
+                <div class="chart-container" style="max-width: 600px;">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+                <p class="text-lg text-gray-700 mt-6 text-center font-medium">
+                    En la UNRC, te equipamos con estas habilidades transversales para que seas un profesional de TIC versátil y capaz de diseñar soluciones robustas y eficientes.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function () {
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const chartColors = {
+                primary: '#5c1b35', // UCA Primary (Guinda)
+                secondary: '#ad9348', // UCA Secondary (Dorado)
+                contrast1: '#8b3a5a', // Lighter Guinda
+                contrast2: '#4a4a4a' // Dark Gray Neutral
+            };
+
+            const pillarLabels = [
+                'Decomposición',
+                ['Reconocimiento', 'de Patrones'],
+                'Abstracción',
+                'Algoritmos'
+            ];
+            
+            const ctxPillars = document.getElementById('pillarsChart')?.getContext('2d');
+            if (ctxPillars) {
+                new Chart(ctxPillars, {
+                    type: 'doughnut',
+                    data: {
+                        labels: pillarLabels,
+                        datasets: [{
+                            data: [25, 25, 25, 25],
+                            backgroundColor: [
+                                chartColors.primary,
+                                chartColors.secondary,
+                                chartColors.contrast1,
+                                chartColors.contrast2
+                            ],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    font: { size: 14, family: 'Inter' }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const skillLabels = [
+                ['Resolución de', 'Problemas'],
+                ['Lógica', 'Algorítmica'],
+                ['Abstracción de', 'Datos'],
+                ['Eficiencia de', 'Procesos'],
+                ['Pensamiento', 'Sistémico']
+            ];
+            
+            const ctxSkills = document.getElementById('skillsRadarChart')?.getContext('2d');
+            if (ctxSkills) {
+                new Chart(ctxSkills, {
+                    type: 'radar',
+                    data: {
+                        labels: skillLabels,
+                        datasets: [
+                            {
+                                label: 'Desarrollo de Software',
+                                data: [9, 10, 8, 8, 9],
+                                fill: true,
+                                backgroundColor: 'rgba(92, 27, 53, 0.2)', // UCA Primary Transparent
+                                borderColor: chartColors.primary,
+                                pointBackgroundColor: chartColors.primary,
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: chartColors.primary
+                            },
+                            {
+                                label: 'Ciencia de Datos',
+                                data: [10, 8, 10, 9, 7],
+                                fill: true,
+                                backgroundColor: 'rgba(173, 147, 72, 0.2)', // UCA Secondary Transparent
+                                borderColor: chartColors.secondary,
+                                pointBackgroundColor: chartColors.secondary,
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: chartColors.secondary
+                            },
+                            {
+                                label: 'Redes y Ciberseguridad',
+                                data: [8, 9, 7, 7, 10],
+                                fill: true,
+                                backgroundColor: 'rgba(74, 74, 74, 0.1)', // Contrast Dark Gray Transparent
+                                borderColor: chartColors.contrast2,
+                                pointBackgroundColor: chartColors.contrast2,
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: chartColors.contrast2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            },
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 10,
+                                pointLabels: {
+                                    font: {
+                                        size: 11
+                                    }
+                                },
+                                ticks: {
+                                    stepSize: 2,
+                                    backdropColor: 'rgba(240, 232, 217, 0.8)' // UCA Beige
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
