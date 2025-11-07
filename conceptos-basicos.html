@@ -12,11 +12,11 @@
             theme: {
                 extend: {
                     colors: {
-                        'uca-primary': '#5c1b35',
-                        'uca-secondary': '#ad9348',
-                        'uca-light': '#fefcf8',
-                        'uca-beige': '#f0e8d9',
-                        'uca-guinda-light': '#8b3a5a'
+                        'uca-primary': '#5c1b35', // Guinda Oscuro
+                        'uca-secondary': '#ad9348', // Dorado
+                        'uca-light': '#fefcf8', // Blanco / Crema
+                        'uca-beige': '#f0e8d9', // Fondo Beige
+                        'uca-guinda-light': '#8b3a5a' // Guinda Intermedio
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -26,6 +26,7 @@
         }
     </script>
     <style>
+        /* Estilos para el gráfico Chart.js */
         .chart-container {
             position: relative;
             width: 100%;
@@ -41,10 +42,58 @@
                 max-height: 400px;
             }
         }
-        .flowchart-step {
-            min-width: 150px;
-            flex-basis: 18%;
+
+        /* --- Estilos del Diagrama de Flujo (Mejorados) --- */
+
+        /* Definición general para los bloques del diagrama */
+        .flow-shape {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #5c1b35; /* Borde Guinda */
+            background-color: #FFFFFF;
+            color: #333333;
+            font-weight: 600;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+            width: 80%; /* Ancho uniforme para mejor alineación en el ejemplo */
         }
+        /* Estilo para INICIO/FIN (Terminal) */
+        .flow-terminal {
+            border-radius: 9999px; /* Forma Ovalada */
+            background-color: #f0e8d9; /* Fondo Beige */
+            border-color: #ad9348; /* Borde Dorado */
+            color: #5c1b35; /* Texto Guinda */
+            width: 60%; /* Más estrecho */
+        }
+        /* Estilo para Proceso (Rectángulo) */
+        .flow-process {
+            border-radius: 0.25rem;
+            border-color: #5c1b35; 
+        }
+        /* Estilo para Entrada/Salida (Paralelogramo) */
+        .flow-io {
+            transform: skewX(-20deg);
+            border-color: #8b3a5a; /* Borde Guinda Claro */
+        }
+        .flow-io-content {
+            transform: skewX(20deg); /* Deshacer el skew para que el texto sea legible */
+        }
+        /* Estilo para la Flecha */
+        .flow-arrow {
+            font-size: 2rem;
+            color: #ad9348; /* Dorado */
+            text-align: center;
+            margin: 0.25rem 0;
+            font-weight: bold;
+            line-height: 1;
+        }
+
     </style>
 </head>
 <body id="top" class="bg-uca-beige font-sans text-gray-800">
@@ -55,15 +104,14 @@
             
             <div class="flex items-center space-x-4 mb-4 md:mb-0">
                 <img src="imagenes/cintilloUNRC.png" 
-                     alt="Logo Universidad Rosario Castellanos" 
-                     class="h-10 w-auto"
-                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
                 >
             </div>
 
             <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
                 Conceptos básicos de la lógica de programación
-            </h1>
             </h1>
             
             <!-- Botón de Acción Inicio (Guinda) -->
@@ -98,6 +146,7 @@
             
             <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div class="flex flex-col items-center text-center">
+                    <!-- Se utiliza la clase flow-shape y flow-process para los estilos -->
                     <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">1. Análisis del Problema</div>
                     <p class="mt-2 text-gray-600 max-w-xs">Definir claramente: ¿cuáles son las entradas, procesos y salidas?</p>
                 </div>
@@ -106,6 +155,7 @@
                 <div class="flow-arrow hidden md:block text-uca-secondary">&rarr;</div>
                 
                 <div class="flex flex-col items-center text-center">
+                    <!-- Se utiliza la clase flow-shape y flow-process para los estilos -->
                     <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">2. Diseño de la Lógica</div>
                     <p class="mt-2 text-gray-600 max-w-xs">Crear el "mapa" de la solución usando pseudocódigo o diagramas de flujo.</p>
                 </div>
@@ -114,6 +164,7 @@
                 <div class="flow-arrow hidden md:block text-uca-secondary">&rarr;</div>
                 
                 <div class="flex flex-col items-center text-center">
+                    <!-- Se utiliza la clase flow-shape y flow-process para los estilos -->
                     <div class="flow-shape flow-process w-48 bg-uca-guinda-light text-uca-light">3. Prueba de Escritorio</div>
                     <p class="mt-2 text-gray-600 max-w-xs">Simular el algoritmo manualmente para verificar su claridad y validez.</p>
                 </div>
@@ -166,6 +217,7 @@ FIN
                 </div>
                 <div class="bg-uca-light rounded-lg shadow-inner p-6">
                     <h4 class="text-xl font-bold text-uca-guinda-light mb-4 text-center">Representación en Diagrama de Flujo</h4>
+                    <!-- El diagrama de flujo ahora usa las clases CSS importadas para el estilo -->
                     <div class="flex flex-col items-center space-y-1">
                         <div class="flow-shape flow-terminal">INICIO</div>
                         <div class="flow-arrow">&darr;</div>
@@ -207,9 +259,9 @@ FIN
             const item = tooltipItems[0];
             let label = item.chart.data.labels[item.dataIndex];
             if (Array.isArray(label)) {
-              return label.join(' ');
+                return label.join(' ');
             } else {
-              return label;
+                return label;
             }
         };
         
