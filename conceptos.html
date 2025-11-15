@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Fundamentales de Programación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', // Guinda Oscuro
+                        'uca-secondary': '#ad9348', // Dorado
+                        'uca-light': '#fefcf8', // Blanco / Crema
+                        'uca-beige': '#f0e8d9', // Fondo Beige
+                        'uca-guinda-light': '#8b3a5a' // Guinda Intermedio
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+            /* Aumentar el padding vertical para dar más espacio a la leyenda sin comprimir el gráfico */
+            padding-top: 2rem; 
+            padding-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+        }
+        .code-block-light {
+            background-color: #fefcf8; /* uca-light */
+            border: 1px dashed #ad9348; /* uca-secondary */
+            color: #5c1b35; /* uca-primary */
+        }
+        .code-block-dark {
+            background-color: #5c1b35; /* uca-primary */
+            color: #fefcf8; /* uca-light */
+        }
+    </style>
+</head>
+<body class="bg-uca-beige font-sans text-gray-800">
+
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Conceptos fundamentales (variables, constantes, operadores)
+            </h1>
+            
+            <!-- Botón de Acción Inicio (Guinda) -->
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl p-4 md:p-8 space-y-8 md:space-y-12 mt-8">
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-secondary">
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-uca-primary mb-4">Los 3 Pilares del Código</h2>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto">
+                Para construir cualquier pieza de software, necesitas tres bloques de construcción fundamentales: <strong>Variables</strong> para almacenar datos que pueden cambiar, <strong>Constantes</strong> para datos que deben permanecer fijos, y <strong>Operadores</strong> para realizar acciones y cálculos con esos datos.
+            </p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-primary">
+            <h2 class="text-2xl font-bold text-uca-primary mb-4">1. Variables: Cajas de Datos Flexibles</h2>
+            <p class="text-base text-gray-700 leading-relaxed mb-6">
+                Una variable es un contenedor etiquetado en la memoria donde puedes guardar información cuyo valor puede cambiar ("variar") durante la ejecución del programa. Son esenciales para el manejo dinámico de la información.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                
+                <div>
+                    <h3 class="text-xl font-bold text-uca-guinda-light mb-2">Ejemplo de una Variable</h3>
+                    <p class="text-gray-700 mb-4">La variable <code class="font-mono bg-gray-100 px-2 py-1 rounded text-uca-primary">contador</code> se inicializa en 1 y luego se incrementa a 2, demostrando su mutabilidad.</p>
+                    <div class="my-6 p-4 rounded-lg code-block-light">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-4xl text-uca-secondary" aria-hidden="true">&#9633;</span>
+                            <div>
+                                <p class="text-sm font-mono text-gray-600">let contador = 1;</p>
+                                <p class="text-lg font-semibold">Variable: <code class="font-mono bg-white px-2 rounded">contador</code></p>
+                                <p class="text-lg font-semibold">Valor Inicial: <code class="font-mono bg-white px-2 rounded">1</code></p>
+                                <p class="text-sm font-mono text-gray-600 mt-2">contador = contador + 1; <span class="text-green-600 font-semibold">(Valor final: 2)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-uca-guinda-light mb-2">Tipos de Datos Comunes</h3>
+                    <p class="text-gray-700 mb-4">Los tipos de datos que almacenan las variables impactan en cómo se procesan. Esta gráfica muestra la distribución de los tipos fundamentales en la programación.</p>
+                    <div class="chart-container">
+                        <canvas id="tiposDatosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-secondary">
+            <h2 class="text-2xl font-bold text-uca-primary mb-4">2. Constantes: Valores Inmutables</h2>
+            <p class="text-base text-gray-700 leading-relaxed mb-6">
+                Una constante almacena un valor que, una vez asignado, <strong>no puede cambiar</strong>. Se utiliza para valores fijos como pi ($\pi$) o la tasa de impuestos, protegiendo el programa de modificaciones accidentales.
+            </p>
+
+            <h3 class="text-xl font-bold text-uca-guinda-light mb-2">Variable vs. Constante</h3>
+            <p class="text-gray-700 mb-4">Una variable (<code class="font-mono bg-gray-100 px-1 rounded">nombre</code>) puede cambiar, mientras que una constante (<code class="font-mono bg-gray-100 px-1 rounded">IVA</code>) generará un error si se intenta reasignar.</p>
+            
+            <div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-lg code-block-light">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-uca-secondary" aria-hidden="true">&#9745;</span>
+                        <div>
+                            <p class="text-lg font-semibold">Variable (Flexible)</p>
+                            <p class="font-mono"><code>let nombre = "Laura";</code></p>
+                            <p class="font-mono text-green-600"><code>nombre = "Ana";</code> (Permitido)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 rounded-lg code-block-dark">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-uca-secondary" aria-hidden="true">&#9888;</span>
+                        <div>
+                            <p class="text-lg font-semibold">Constante (Fija)</p>
+                            <p class="font-mono text-white"><code>const IVA = 0.16;</code></p>
+                            <p class="font-mono text-red-400"><code>IVA = 0.18;</code> (¡ERROR de reasignación!)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-primary">
+            <h2 class="text-2xl font-bold text-uca-primary mb-4">3. Operadores: Las Herramientas de Acción</h2>
+            <p class="text-base text-gray-700 leading-relaxed mb-6">
+                Los operadores son símbolos que le dicen al programa que realice una operación específica. Son los "verbos" que actúan sobre las variables y constantes (los "sustantivos").
+            </p>
+
+            <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-4 bg-uca-beige rounded-lg shadow-inner border border-uca-secondary">
+                    <h4 class="text-lg font-bold text-uca-primary">Aritméticos</h4>
+                    <p class="text-sm text-gray-700">Cálculos matemáticos.</p>
+                    <code class="block mt-2 text-sm font-mono text-uca-guinda-light">+ (Suma)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">- (Resta)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">* (Multiplicación)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">% (Módulo)</code>
+                </div>
+                <div class="p-4 bg-uca-beige rounded-lg shadow-inner border border-uca-secondary">
+                    <h4 class="text-lg font-bold text-uca-primary">Asignación</h4>
+                    <p class="text-sm text-gray-700">Guardan valores.</p>
+                    <code class="block mt-2 text-sm font-mono text-uca-guinda-light">= (Asignar)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">+= (Sumar y asignar)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">-- (Decremento)</code>
+                </div>
+                <div class="p-4 bg-uca-beige rounded-lg shadow-inner border border-uca-secondary">
+                    <h4 class="text-lg font-bold text-uca-primary">Comparación</h4>
+                    <p class="text-sm text-gray-700">Comparan, devuelven Booleano.</p>
+                    <code class="block mt-2 text-sm font-mono text-uca-guinda-light">== (Igualdad)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">!= (Diferente)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">> (Mayor que)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light"><= (Menor o igual)</code>
+                </div>
+                <div class="p-4 bg-uca-beige rounded-lg shadow-inner border border-uca-secondary">
+                    <h4 class="text-lg font-bold text-uca-primary">Lógicos</h4>
+                    <p class="text-sm text-gray-700">Combinan condiciones.</p>
+                    <code class="block mt-2 text-sm font-mono text-uca-guinda-light">&& (Y lógico - AND)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">|| (O lógico - OR)</code>
+                    <code class="block text-sm font-mono text-uca-guinda-light">! (No lógico - NOT)</code>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-8 border-t-4 border-uca-secondary">
+            <h2 class="text-2xl font-bold text-uca-primary mb-4">Ejemplo Integrado: Cálculo de Área</h2>
+            <p class="text-base text-gray-700 leading-relaxed mb-6">
+                En este ejemplo, una <strong>Constante</strong> define el factor $\pi$ (3.1416), una <strong>Variable</strong> almacena el radio ($r$), y un <strong>Operador</strong> realiza el cálculo del área ($A = \pi \cdot r^2$).
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto shadow-xl">
+                    <p><span class="text-yellow-400">const</span> <span class="text-cyan-300">PI</span> = <span class="text-orange-300">3.1416</span>;</p>
+                    <p><span class="text-yellow-400">let</span> <span class="text-cyan-300">radio</span> = <span class="text-orange-300">5</span>; <span class="text-gray-500">// Variable: El radio puede cambiar</span></p>
+                    <br>
+                    <p><span class="text-yellow-400">let</span> <span class="text-cyan-300">area</span> = <span class="text-cyan-300">PI</span> <span class="text-red-400">*</span> <span class="text-cyan-300">radio</span> <span class="text-red-400">*</span> <span class="text-cyan-300">radio</span>;</p>
+                    <p class="text-gray-500">// Operador * (aritmético) para multiplicar</p>
+                    <br>
+                    <p><span class="text-cyan-300">radio</span> = <span class="text-orange-300">10</span>; <span class="text-gray-500">// Actualizamos la variable</span></p>
+                    <p><span class="text-cyan-300">area</span> = <span class="text-cyan-300">PI</span> <span class="text-red-400">*</span> <span class="text-cyan-300">radio</span> <span class="text-red-400">*</span> <span class="text-cyan-300">radio</span>;</p>
+                    <p class="text-gray-500">// El nuevo área es 314.16</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-uca-guinda-light mb-2">Conceptos en Acción</h3>
+                    <ul class="list-disc list-outside space-y-3 pl-5 text-gray-700">
+                        <li>
+                            <strong class="text-uca-primary">Constante (pi):</strong> Garantiza que el valor matemático no se altere.
+                        </li>
+                        <li>
+                            <strong class="text-uca-primary">Variable (radio):</strong> Permite calcular el área de diferentes círculos sin modificar el código.
+                        </li>
+                        <li>
+                            <strong class="text-uca-primary">Operador ($ * $ y $ = $):</strong> Realiza la operación de multiplicación y la asignación del resultado final.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // NO SVG, NO MERMAID JS USED
+        function processChartLabels(labels) {
+            // Esta función ya no es tan crítica debido a la simplificación de etiquetas, 
+            // pero se mantiene para la compatibilidad con el formato de Chart.js si se requiere.
+            return labels.map(label => {
+                if (label.length > 16) {
+                    let words = label.split(' ');
+                    let lines = [];
+                    let currentLine = '';
+                    words.forEach((word, index) => {
+                        let potentialLine = currentLine + word + ' ';
+                        if (potentialLine.length > 16 && currentLine.length > 0) {
+                            lines.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine = potentialLine;
+                        }
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctxTipos = document.getElementById('tiposDatosChart').getContext('2d');
+            
+            // Etiquetas simplificadas para evitar el corte y la superposición en el gráfico
+            const originalLabels = ['Números (Cálculos)', 'Cadenas (Texto)', 'Booleanos (Lógica)', 'Estructuras de Datos'];
+            
+            new Chart(ctxTipos, {
+                type: 'doughnut',
+                data: {
+                    labels: processChartLabels(originalLabels),
+                    datasets: [{
+                        label: 'Distribución de Tipos de Datos',
+                        data: [45, 30, 15, 10], // Distribución ligeramente ajustada para la estética
+                        backgroundColor: ['#5c1b35', '#ad9348', '#8b3a5a', '#f0e8d9'], // UCA Palette
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#5c1b35', // UCA Primary for text
+                                font: {
+                                    size: 11, // Tamaño de fuente reducido a 11px
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

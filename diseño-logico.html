@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño Lógico para la Resolución de Problemas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', // Guinda Oscuro
+                        'uca-secondary': '#ad9348', // Dorado
+                        'uca-light': '#fefcf8', // Blanco / Crema
+                        'uca-beige': '#f0e8d9', // Fondo Beige
+                        'uca-guinda-light': '#8b3a5a' // Guinda Intermedio
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 320px;
+            }
+        }
+        .text-verdad {
+            color: #8b3a5a; /* uca-guinda-light */
+            font-weight: 700;
+        }
+        .text-falso {
+            color: #ad9348; /* uca-secondary */
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-uca-beige font-sans leading-relaxed text-gray-800">
+
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Diseño lógico para la resolución de problemas (uso de operadores lógicos)
+            </h1>
+            
+            <!-- Botón de Acción Inicio (Guinda) -->
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl mt-8">
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <section class="md:col-span-1 bg-uca-light rounded-lg shadow-xl p-6 md:p-8 border-t-4 border-uca-primary">
+                <h2 class="text-2xl font-bold mb-3 text-uca-primary">Los Pilares de la Lógica Booleana</h2>
+                <p class="text-base text-gray-700 mb-4">
+                    Toda la toma de decisiones en programación se sustenta en el <strong>Álgebra Booleana</strong>, un sistema binario donde solo existen dos estados posibles. Esto permite que la computadora evalúe condiciones de manera precisa.
+                </p>
+                <p class="text-base text-gray-700">
+                    Solo manejamos dos valores: algo es <span class="font-bold text-uca-guinda-light">Verdadero</span> (True, 1) o es <span class="font-bold text-uca-secondary">Falso</span> (False, 0). Los operadores lógicos son las compuertas que manipulan estos estados.
+                </p>
+            </section>
+
+            <section class="md:col-span-1 bg-uca-light rounded-lg shadow-xl p-6 md:p-8 border-t-4 border-uca-secondary">
+                <h2 class="text-2xl font-bold text-center mb-4 text-uca-primary">La Dualidad Booleana</h2>
+                <p class="text-center text-gray-600 mb-4">Visualización de los dos únicos valores en la computación.</p>
+                <div class="chart-container">
+                    <canvas id="booleanChart"></canvas>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-uca-light rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-uca-primary">Los 3 Operadores Lógicos Fundamentales</h2>
+                <p class="text-center text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+                    Estos operadores son las claves para construir el <strong>control de flujo</strong> de un programa, permitiendo que el código reaccione a múltiples condiciones simultáneamente.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div class="border-l-4 rounded-r-lg p-6 bg-uca-beige border-uca-primary">
+                        <h3 class="text-5xl font-bold mb-3 text-center text-uca-primary">AND</h3>
+                        <p class="text-xl font-semibold text-center mb-2 text-uca-guinda-light">Conjunción (Y)</p>
+                        <p class="text-gray-700 text-center">
+                            Solo devuelve <span class="text-verdad">Verdadero</span> si <strong>TODAS</strong> las condiciones conectadas son verdaderas. Falla con una sola condición falsa.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 rounded-r-lg p-6 bg-uca-beige border-uca-secondary">
+                        <h3 class="text-5xl font-bold mb-3 text-center text-uca-secondary">OR</h3>
+                        <p class="text-xl font-semibold text-center mb-2 text-uca-guinda-light">Disyunción (O)</p>
+                        <p class="text-gray-700 text-center">
+                            Devuelve <span class="text-verdad">Verdadero</span> si <strong>AL MENOS UNA</strong> de las condiciones conectadas es verdadera. Solo falla si todas son falsas.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 rounded-r-lg p-6 bg-uca-beige border-uca-guinda-light">
+                        <h3 class="text-5xl font-bold mb-3 text-center text-uca-guinda-light">NOT</h3>
+                        <p class="text-xl font-semibold text-center mb-2 text-uca-guinda-light">Negación (NO)</p>
+                        <p class="text-gray-700 text-center">
+                            Simplemente <strong>invierte</strong> el valor booleano: V $\rightarrow$ F, y F $\rightarrow$ V. Es un operador unario (afecta a una sola entrada).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-uca-light rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-uca-primary">Tablas de Verdad: Fundamento del Diseño Lógico</h2>
+                <p class="text-center text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+                    El uso de estas tablas es la mejor manera de verificar y asegurar que nuestro diseño lógico es correcto para todos los casos posibles.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-uca-primary">1. AND (A and B)</h3>
+                        <table class="w-full text-center border-2 border-collapse rounded-lg bg-uca-light" style="border-color: #5c1b35;">
+                            <thead>
+                                <tr class="bg-uca-primary text-white">
+                                    <th class="border p-2">A</th>
+                                    <th class="border p-2">B</th>
+                                    <th class="border p-2">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-uca-secondary">2. OR (A or B)</h3>
+                        <table class="w-full text-center border-2 border-collapse rounded-lg bg-uca-light" style="border-color: #ad9348;">
+                            <thead>
+                                <tr class="bg-uca-secondary text-white">
+                                    <th class="border p-2">A</th>
+                                    <th class="border p-2">B</th>
+                                    <th class="border p-2">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-uca-guinda-light">3. NOT (neg A)</h3>
+                        <table class="w-full text-center border-2 border-collapse rounded-lg bg-uca-light" style="border-color: #8b3a5a;">
+                            <thead>
+                                <tr class="bg-uca-guinda-light text-white">
+                                    <th class="border p-2">A</th>
+                                    <th class="border p-2">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-2 text-verdad">V</td>
+                                    <td class="border p-2 text-falso">F</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 text-falso">F</td>
+                                    <td class="border p-2 text-verdad">V</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2">&nbsp;</td>
+                                    <td class="border p-2">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2">&nbsp;</td>
+                                    <td class="border p-2">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-1 bg-uca-light rounded-lg shadow-xl p-6 md:p-8 border-t-4 border-uca-primary">
+                <h2 class="text-2xl font-bold mb-4 text-uca-primary">Jerarquía de Evaluación</h2>
+                <p class="text-gray-700 mb-4">
+                    Cuando una expresión tiene varios operadores, el programa los evalúa en este orden. Los paréntesis se usan para forzar un orden diferente.
+                </p>
+                <div class="chart-container" style="height: 240px; max-height: 300px;">
+                    <canvas id="precedenceChart"></canvas>
+                </div>
+            </section>
+
+            <section class="md:col-span-1 bg-uca-light rounded-lg shadow-xl p-6 md:p-8 border-t-4 border-uca-secondary">
+                <h2 class="text-2xl font-bold mb-4 text-uca-primary">Ejemplo de Decisión Compuesta</h2>
+                <p class="text-gray-700 mb-4">
+                    Para que una tienda en línea ofrezca un descuento especial, deben cumplirse dos condiciones (un <strong>AND</strong>): ser cliente premium *y* que la compra sea mayor a $1000.
+                </p>
+                <div class="bg-uca-primary text-white p-4 rounded-lg font-mono text-sm overflow-x-auto shadow-xl">
+                    <pre><code><span class="text-uca-secondary">SI</span> (es_premium <span class="text-uca-secondary">Y</span> (monto_compra > 1000)) <span class="text-uca-secondary">ENTONCES</span>
+    Escribir "APLICA Descuento Especial."
+<span class="text-uca-secondary">SINO</span>
+    Escribir "Solo Descuento Estándar."
+<span class="text-uca-secondary">FIN SI</span>
+</code></pre>
+                    <p class="text-sm mt-3 text-uca-light">
+                        <span class="font-bold text-uca-secondary">Caso de éxito:</span> es\_premium = V <span class="text-uca-secondary">Y</span> monto\_compra = 1200
+                    </p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // NO SVG, NO MERMAID JS USED
+        
+        const ucaPalette = {
+            primary: '#5c1b35', // Guinda Oscuro
+            secondary: '#ad9348', // Dorado
+            guindaLight: '#8b3a5a', // Guinda Intermedio
+            beige: '#f0e8d9', // Fondo Beige
+            light: '#fefcf8' // Blanco / Crema
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const baseOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: ucaPalette.primary,
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    backgroundColor: ucaPalette.primary,
+                    titleColor: ucaPalette.light,
+                    bodyColor: ucaPalette.light,
+                    cornerRadius: 4,
+                    displayColors: true
+                }
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Dualidad Booleana Chart
+            const ctxBoolean = document.getElementById('booleanChart').getContext('2d');
+            new Chart(ctxBoolean, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Verdadero (True)', 'Falso (False)'],
+                    datasets: [{
+                        label: 'Valores Booleanos',
+                        data: [50, 50],
+                        backgroundColor: [
+                            ucaPalette.guindaLight,
+                            ucaPalette.secondary
+                        ],
+                        borderColor: [
+                            ucaPalette.guindaLight,
+                            ucaPalette.secondary
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    ...baseOptions,
+                    cutout: '70%',
+                    plugins: {
+                        ...baseOptions.plugins,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: ucaPalette.primary,
+                                font: {
+                                    size: 16,
+                                    weight: '600'
+                                },
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Jerarquía de Operadores Chart
+            const ctxPrecedence = document.getElementById('precedenceChart').getContext('2d');
+            
+            const precedenceLabels = [
+                'NOT (¡)', 
+                'AND (&&)', 
+                'OR (||)'
+            ];
+
+            new Chart(ctxPrecedence, {
+                type: 'bar',
+                data: {
+                    labels: precedenceLabels,
+                    datasets: [{
+                        label: 'Prioridad de Evaluación (Mayor a Menor)',
+                        data: [3, 2, 1],
+                        backgroundColor: [
+                            ucaPalette.guindaLight,
+                            ucaPalette.secondary,
+                            ucaPalette.primary
+                        ],
+                        borderColor: ucaPalette.primary,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...baseOptions,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 3.5,
+                            ticks: {
+                                stepSize: 1,
+                                color: ucaPalette.primary,
+                                font: {
+                                    size: 14
+                                }
+                            },
+                            grid: {
+                                color: ucaPalette.beige
+                            },
+                            title: {
+                                display: true,
+                                text: 'Nivel de Prioridad',
+                                color: ucaPalette.primary,
+                                font: {
+                                    size: 14,
+                                    weight: '600'
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: ucaPalette.primary,
+                                font: {
+                                    size: 16,
+                                    weight: '600'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...baseOptions.plugins,
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
