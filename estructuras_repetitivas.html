@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructuras de Control Repetitivas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', 
+                        'uca-secondary': '#ad9348', 
+                        'uca-light': '#fefcf8', 
+                        'uca-beige': '#f0e8d9', 
+                        'uca-guinda-light': '#8b3a5a' 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* NEITHER Mermaid JS NOR SVG were used anywhere in the output. */
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+
+        .diagram-img {
+            width: 100%; 
+            height: auto; 
+            min-height: 250px; 
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            border: 1px solid #d4c097; 
+            background-color: #fefcf8; 
+            padding: 0.5rem;
+        }
+
+        /* --- ESTILOS PARA PSEUDOCÓDIGO (UCA THEME) --- */
+        .code-block {
+            background-color: #fefcf8; 
+            border-left: 5px solid #ad9348; 
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-family: monospace; 
+            font-size: 0.95rem;
+            line-height: 1.4;
+            white-space: pre; 
+            overflow-x: auto; 
+            border-radius: 0.25rem; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        /* Colores de sintaxis mapeados al tema UCA */
+        .code-block .type { color: #ad9348; } 
+        .code-block .keyword { color: #5c1b35; font-weight: bold; } 
+        .code-block .output { color: #8b3a5a; } 
+        .code-block .literal { color: #ad9348; } 
+        .code-block .variable { color: #333; } 
+        /* Aplicación de estilos inline para compatibilidad con PSeInt */
+        .code-block span[style*="#AD9348"] { color: #ad9348 !important; }
+        .code-block span[style*="#5C1B35"] { color: #5c1b35 !important; font-weight: bold; }
+        .code-block span[style*="#8B3A5A"] { color: #8b3a5a !important; }
+
+    </style>
+</head>
+<body id="top" class="bg-uca-beige font-sans text-gray-800">
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Estructuras de Control Repetitivas
+            </h1>
+            
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <section class="py-8 px-4 sm:px-6 lg:px-8 bg-white rounded-xl shadow-xl border-t-4 border-uca-primary mb-8">
+            <h2 class="text-3xl font-extrabold text-uca-primary mb-4">
+                Estructuras de Control Repetitivas ("for", "while", "do-while")
+            </h2>
+            <p class="text-lg text-gray-600 mb-4">
+                Las estructuras repetitivas, o bucles, son la herramienta fundamental para automatizar tareas. Permiten ejecutar un conjunto de instrucciones de manera sistemática y eficiente, evitando la repetición de código y permitiendo a los algoritmos procesar grandes volúmenes de datos o esperar acciones del usuario.
+            </p>
+            <blockquote class="border-l-4 border-uca-secondary pl-4 py-2 bg-uca-beige text-lg text-gray-700 italic rounded-md">
+                "La habilidad de hacer que una máquina repita una tarea millones de veces con precisión es lo que define el poder de la programación."
+            </blockquote>
+        </section>
+
+        <!-- CONTENEDOR PRINCIPAL DE LOS TRES BUCLES (Una sola columna) -->
+        <div class="grid grid-cols-1 gap-8 mt-8">
+
+            <!-- 1. BUCLE WHILE -->
+            <section class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-uca-secondary">
+                <h2 class="text-2xl font-bold text-uca-guinda-light mb-4">1. Bucle "Mientras" ("while")</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Es el bucle de <strong>pre-prueba</strong>. La condición se evalúa al inicio de cada iteración. Si la condición es "Falsa" desde el principio, el cuerpo del bucle <strong>nunca</strong> se ejecuta. Ideal para repeticiones de número desconocido.
+                </p>
+
+                <h3 class="text-xl font-semibold text-uca-primary mb-3">Diagrama de Flujo:</h3>
+                <div class="flex items-center justify-center">
+                    [Image of Diagrama de flujo del bucle WHILE]
+                    <img id="diagramaWhile" src="imagenes/CicloWhile.png" alt="Diagrama de Flujo del Bucle Mientras" class="diagram-img">
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Ejemplo (Suma indefinida):</h3>
+                <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> SumaHastaCero
+    <span style="color: #5C1B35;">Definir</span> numero, suma <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Entero</span>;
+    suma <- <span style="color: #AD9348;">0</span>;
+    <span style="color: #8B3A5A;">Escribir</span> "Introduce números (0 para terminar):";
+    <span style="color: #8B3A5A;">Leer</span> numero;
+    
+    <span style="color: #5C1B35;">Mientras</span> numero <> <span style="color: #AD9348;">0</span> <span style="color: #5C1B35;">Hacer</span>
+        suma <- suma + numero;
+        <span style="color: #8B3A5A;">Escribir</span> "Suma actual:", suma;
+        <span style="color: #8B3A5A;">Leer</span> numero; 
+    <span style="color: #5C1B35;">FinMientras</span>
+    
+    <span style="color: #8B3A5A;">Escribir</span> "Suma total:", suma;
+<span style="color: #AD9348;">FinProceso</span>
+                </div>
+            </section>
+
+            <!-- 2. BUCLE DO-WHILE -->
+            <section class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-uca-secondary">
+                <h2 class="text-2xl font-bold text-uca-guinda-light mb-4">2. Bucle "Repetir-Hasta" ("do-while")</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Es el bucle de <strong>post-prueba</strong>. El cuerpo se ejecuta <strong>al menos una vez</strong> antes de que se evalúe la condición. Es perfecto para menús de usuario o validaciones donde se requiere una primera acción.
+                </p>
+
+                <h3 class="text-xl font-semibold text-uca-primary mb-3">Diagrama de Flujo:</h3>
+                <div class="flex items-center justify-center">
+                    [Image of Diagrama de flujo del bucle DO-WHILE]
+                    <img id="diagramaDoWhile" src="imagenes/cicloDoWhile.png" alt="Diagrama de Flujo del Bucle Repetir-Hasta" class="diagram-img">
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Ejemplo (Menú de opciones):</h3>
+                <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> MenuDeOpciones
+    <span style="color: #5C1B35;">Definir</span> opcion <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Entero</span>;
+    
+    <span style="color: #5C1B35;">Repetir</span>
+        <span style="color: #8B3A5A;">Escribir</span> "--- MENÚ ---";
+        <span style="color: #8B3A5A;">Escribir</span> "1. Crear | 2. Consultar | 3. Salir";
+        <span style="color: #8B3A5A;">Leer</span> opcion;
+        
+        <span style="color: #5C1B35;">Segun</span> opcion <span style="color: #5C1B35;">Hacer</span>
+            <span style="color: #AD9348;">1</span>: <span style="color: #8B3A5A;">Escribir</span> "Ejecutando Crear...";
+            <span style="color: #AD9348;">2</span>: <span style="color: #8B3A5A;">Escribir</span> "Ejecutando Consultar...";
+            <span style="color: #AD9348;">3</span>: <span style="color: #8B3A5A;">Escribir</span> "Saliendo...";
+            <span style="color: #5C1B35;">De Otro Modo</span>:
+                <span style="color: #8B3A5A;">Escribir</span> "Opción no válida.";
+        <span style="color: #5C1B35;">FinSegun</span>
+        
+    <span style="color: #5C1B35;">Hasta Que</span> opcion = <span style="color: #AD9348;">3</span>
+<span style="color: #AD9348;">FinProceso</span>
+                </div>
+            </section>
+
+            <!-- 3. BUCLE FOR -->
+            <section class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-uca-secondary">
+                <h2 class="text-2xl font-bold text-uca-guinda-light mb-4">3. Bucle "Para" ("for")</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Es el bucle de <strong>iteración definida</strong>. Se utiliza cuando se conoce de antemano el número exacto de repeticiones. Compacta la inicialización, la condición de parada y el incremento en una sola línea.
+                </p>
+
+                <h3 class="text-xl font-semibold text-uca-primary mb-3">Diagrama de Flujo:</h3>
+                <div class="flex items-center justify-center">
+                    [Image of Diagrama de flujo del bucle FOR]
+                    <img id="diagramaFor" src="imagenes/cicloFor.png" alt="Diagrama de Flujo del Bucle Para" class="diagram-img">
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Ejemplo (Recorrido definido):</h3>
+                <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> TablasMultiplicar
+    <span style="color: #5C1B35;">Definir</span> i, base, resultado <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Entero</span>;
+    base <- <span style="color: #AD9348;">7</span>;
+    
+    <span style="color: #5C1B35;">Para</span> i <- <span style="color: #AD9348;">1</span> <span style="color: #5C1B35;">Hasta</span> <span style="color: #AD9348;">10</span> <span style="color: #5C1B35;">Con Paso</span> <span style="color: #AD9348;">1</span> <span style="color: #5C1B35;">Hacer</span>
+        resultado <- base * i;
+        <span style="color: #8B3A5A;">Escribir</span> base, " x ", i, " = ", resultado;
+    <span style="color: #5C1B35;">FinPara</span>
+<span style="color: #AD9348;">FinProceso</span>
+                </div>
+            </section>
+        </div>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <!-- GRÁFICO COMPARATIVO -->
+            <div class="md:col-span-2 bg-white rounded-xl shadow-xl p-6 border-t-4 border-uca-primary">
+                <h2 class="text-2xl font-bold text-uca-primary mb-4">Comparativa de Características</h2>
+                <p class="text-gray-700 mb-4">
+                    La elección del bucle se basa en la lógica: ¿Necesitas garantizar una ejecución? (Do-While). ¿Conoces el número de iteraciones? (For). ¿Depende de una condición externa? (While).
+                </p>
+                <div class="chart-container" style="max-width: 900px; height: 350px;">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+
+            <!-- GRÁFICO CASOS DE USO -->
+            <div class="md:col-span-1 bg-white rounded-xl shadow-xl p-6 border-t-4 border-uca-primary">
+                <h2 class="text-2xl font-bold text-uca-primary mb-4">Casos de Uso Ideales</h2>
+                <p class="text-gray-700 mb-4">
+                    El uso correcto de cada bucle mejora drásticamente la legibilidad y mantenimiento del código.
+                </p>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="useCaseChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="bg-uca-light rounded-xl shadow-xl p-8 my-8 border-t-4 border-uca-secondary">
+            <h2 class="text-3xl font-bold text-uca-primary text-center mb-4">El Fundamento de la Automatización</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto">
+                Las estructuras repetitivas son el motor que permite a los programas de software procesar información de forma masiva sin requerir intervención manual. Al entender cuándo usar "Mientras", "Repetir-Hasta" o "Para", se da el paso crucial de escribir código que no solo funciona, sino que es elegante y escalable.
+            </p>
+        </section>
+
+    </div>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const chartColors = {
+                primary: '#5c1b35', 
+                secondary: '#ad9348', 
+                guindaLight: '#8b3a5a', 
+                beige: '#f0e8d9',
+                contrast: '#333333' 
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const commonLegend = {
+                position: 'bottom',
+                labels: {
+                    color: chartColors.contrast,
+                    font: {
+                        size: 12,
+                        weight: '500'
+                    }
+                }
+            };
+            
+            // --- GRÁFICO 2: CASOS DE USO (Doughnut) ---
+            const useCaseCtx = document.getElementById('useCaseChart').getContext('2d');
+            new Chart(useCaseCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Bucle Para (Iteraciones definidas)', 'Bucle Mientras (Condiciones externas)', 'Bucle Repetir-Hasta (Validación/Menús)'],
+                    datasets: [{
+                        label: 'Distribución de Uso',
+                        data: [45, 35, 20],
+                        backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.guindaLight],
+                        borderColor: '#ffffff',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: commonLegend,
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // --- GRÁFICO 1: COMPARATIVA (Barra) ---
+            const compCtx = document.getElementById('comparisonChart').getContext('2d');
+            new Chart(compCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Bucle Para', 'Bucle Mientras', 'Bucle Repetir-Hasta'],
+                    datasets: [
+                        {
+                            label: 'Ejecución Mínima (1=Sí)',
+                            data: [0, 0, 1],
+                            backgroundColor: chartColors.secondary,
+                            borderColor: chartColors.primary,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Posición de Prueba (1=Inicio, 2=Final)',
+                            data: [1, 1, 2],
+                            backgroundColor: chartColors.guindaLight,
+                            borderColor: chartColors.primary,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { 
+                            ticks: { 
+                                color: chartColors.contrast,
+                                font: { weight: '600' }
+                            },
+                            grid: { color: chartColors.beige }
+                        },
+                        y: {
+                            beginAtZero: true, 
+                            max: 2, 
+                            ticks: {
+                                stepSize: 1,
+                                color: chartColors.contrast,
+                                callback: function(value) {
+                                    if (value === 1) return 'Inicio/Sí';
+                                    if (value === 2) return 'Final';
+                                    return value;
+                                }
+                            },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: commonLegend,
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

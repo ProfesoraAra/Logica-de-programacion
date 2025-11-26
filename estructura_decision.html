@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción al Pensamiento Computacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35',
+                        'uca-secondary': '#ad9348',
+                        'uca-light': '#fefcf8',
+                        'uca-beige': '#f0e8d9',
+                        'uca-guinda-light': '#8b3a5a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .flowchart-step {
+            min-width: 150px;
+            flex-basis: 18%;
+        }
+        /* --- ESTILOS AGREGADOS PARA EL PSEUDOCÓDIGO --- */
+        .code-block {
+            background-color: #f8f8f8; /* Fondo claro para el bloque de código */
+            border-left: 5px solid #ad9348; /* Borde de color secundario (dorado) */
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-family: monospace; /* Fuente monoespaciada para código */
+            font-size: 0.95rem;
+            line-height: 1.4;
+            white-space: pre; /* Permite el formato de indentación del pseudocódigo */
+            overflow-x: auto; /* Permite desplazamiento horizontal si el código es largo */
+            border-radius: 0.25rem; /* Bordes ligeramente redondeados */
+        }
+        /* Coloración de sintaxis para las palabras reservadas (opcional pero recomendado) */
+        .code-block .keyword {
+            color: #5c1b35; /* Color primario (guinda) para palabras clave */
+            font-weight: bold;
+        }
+        .code-block .type {
+            color: #ad9348; /* Color secundario (dorado) para tipos de datos */
+        }
+        .code-block .output {
+            color: #8b3a5a; /* Color guinda claro para funciones de E/S */
+        }
+        .code-block .literal {
+            color: #ad9348; /* Color para literales (números/strings) */
+        }
+        /* Arreglo para el pseudocódigo existente, mapeando los estilos inline a clases */
+        .code-block span[style*="#AD9348"] { /* Proceso, Real, Entero, literales */
+            color: #ad9348 !important; 
+        }
+        .code-block span[style*="#5C1B35"] { /* Si, Sino, Definir, Segun, etc. */
+            color: #5c1b35 !important;
+            font-weight: bold;
+        }
+        .code-block span[style*="#8B3A5A"] { /* Escribir, Leer */
+            color: #8b3a5a !important;
+        }
+        /* --- FIN DE ESTILOS AGREGADOS --- */
+    </style>
+</head>
+<body id="top" class="bg-uca-beige font-sans text-gray-800">
+    <header class="bg-uca-light shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Estructuras de control condicionales / switch case
+            </h1>
+            
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <section class="py-8 px-4 sm:px-6 lg:px-8 bg-white rounded-xl shadow-xl border-t-4 border-uca-primary">
+            <h2 class="text-3xl font-extrabold text-uca-primary mb-4">
+                Algoritmos y la Capacidad de Decisión
+            </h2>
+            <p class="text-lg text-gray-600 mb-4">
+                Dentro del Pensamiento Computacional, la construcción de <strong>Algoritmos</strong> es el pilar donde se definen las secuencias de instrucciones. Sin embargo, un algoritmo no es solo una lista de pasos; para que sea útil, debe ser capaz de reaccionar a distintas situaciones o datos de entrada. Aquí es donde entran las <strong>Estructuras de Control Condicionales</strong>, el mecanismo que dota a nuestros programas de la inteligencia para tomar decisiones lógicas.
+            </p>
+            <blockquote class="border-l-4 border-uca-secondary pl-4 py-2 bg-uca-beige text-lg text-gray-700 italic rounded-md">
+                "La lógica de programación es la habilidad de construir el puente entre la necesidad humana y la ejecución de la máquina."
+            </blockquote>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+
+            <section class="bg-white rounded-xl shadow-xl p-6 md:p-8 border-t-4 border-uca-secondary">
+                <h2 class="text-3xl font-bold text-uca-primary mb-4">1. Condicional Simple ("Si-Sino" / "if-else")</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Esta es la base de la toma de decisiones. Evalúa una expresión booleana que resulta en VERDADERO o FALSO. El programa se bifurca en dos caminos mutuamente excluyentes: se ejecuta el bloque <strong>Si (if)</strong> si la condición es cierta, o el bloque <strong>Sino (else)</strong> si es falsa.
+                </p>
+
+                <h3 class="text-xl font-semibold text-uca-secondary mb-4">Diagrama de Flujo (Bifurcación):</h3>
+                <div class="placeholder-image-container">
+                    <img src="imagenes/Ejemplo1.jpg"/>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Ejemplo en Pseudocódigo (PSeInt):</h3>
+                <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> ControlAcceso
+    <span style="color: #5C1B35;">Definir</span> edad <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Entero</span>;
+    <span style="color: #8B3A5A;">Escribir</span> "Ingresa tu edad:";
+    <span style="color: #8B3A5A;">Leer</span> edad;
+    
+    <span style="color: #5C1B35;">Si</span> edad >= 18 <span style="color: #5C1B35;">Entonces</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Acceso permitido al sistema.";
+    <span style="color: #5C1B35;">Sino</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Acceso denegado: Menor de edad.";
+    <span style="color: #5C1B35;">FinSi</span>
+<span style="color: #AD9348;">FinProceso</span>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-xl p-6 md:p-8 border-t-4 border-uca-secondary">
+                <h2 class="text-3xl font-bold text-uca-primary mb-4">2. Condicionales Anidadas</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Las estructuras anidadas (o "elif" / "sino si") permiten evaluar condiciones secundarias <strong>solo si</strong> la condición primaria fue verdadera (o falsa). Esto construye un <strong>árbol de decisiones</strong> que permite una lógica más refinada y que no se limita a dos posibles resultados, sino a múltiples escenarios encadenados.
+                </p>
+
+                <h3 class="text-xl font-semibold text-uca-secondary mb-4">Diagrama de Flujo (Árbol de Decisión):</h3>
+                <div class="placeholder-image-container">
+                    <img src="imagenes/Ejemplo2.jpg"/>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Ejemplo en Pseudocódigo (PSeInt):</h3>
+                <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> ClasificacionNotas
+    <span style="color: #5C1B35;">Definir</span> nota <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Real</span>;
+    nota <- 85;
+    
+    <span style="color: #5C1B35;">Si</span> nota >= 90 <span style="color: #5C1B35;">Entonces</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Excelente (A)";
+    <span style="color: #5C1B35;">Sino Si</span> nota >= 80 <span style="color: #5C1B35;">Entonces</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Notable (B)";
+    <span style="color: #5C1B35;">Sino Si</span> nota >= 70 <span style="color: #5C1B35;">Entonces</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Aprobado (C)";
+    <span style="color: #5C1B35;">Sino</span>
+        <span style="color: #8B3A5A;">Escribir</span> "Reprobado (F)";
+    <span style="color: #5C1B35;">FinSi</span>
+<span style="color: #AD9348;">FinProceso</span>
+                </div>
+            </section>
+        </div>
+
+        <section class="bg-white rounded-xl shadow-xl p-6 md:p-8 my-8 border-t-4 border-uca-secondary">
+            <h2 class="text-3xl font-bold text-uca-primary mb-4">3. Selección Múltiple ("Segun" / "switch")</h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                La estructura "Segun" ("switch") es una alternativa limpia y eficiente para evaluar una variable contra <strong>múltiples valores específicos y discretos</strong>. En lugar de usar muchos "Si-Sino Si", se define un caso para cada valor posible. Si no hay coincidencia, se ejecuta el bloque <strong>De Otro Modo</strong> ("default").
+            </p>
+
+            <h3 class="text-xl font-semibold text-uca-secondary mb-4">Diagrama de Flujo (Selección de Casos):</h3>
+            <div class="placeholder-image-container">
+                <img src="imagenes/Ejemplo3.jpg"/>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Ejemplo en Pseudocódigo (PSeInt):</h3>
+            <div class="code-block">
+<span style="color: #AD9348;">Proceso</span> SeleccionOpcion
+    <span style="color: #5C1B35;">Definir</span> opcion <span style="color: #5C1B35;">Como</span> <span style="color: #AD9348;">Entero</span>;
+    <span style="color: #8B3A5A;">Escribir</span> "Selecciona: 1(Crear), 2(Leer), 3(Salir)";
+    <span style="color: #8B3A5A;">Leer</span> opcion;
+    
+    <span style="color: #5C1B35;">Segun</span> opcion <span style="color: #5C1B35;">Hacer</span>
+        <span style="color: #AD9348;">1</span>:
+            <span style="color: #8B3A5A;">Escribir</span> "Iniciando creación de registro.";
+        <span style="color: #AD9348;">2</span>:
+            <span style="color: #8B3A5A;">Escribir</span> "Consultando la base de datos.";
+        <span style="color: #AD9348;">3</span>:
+            <span style="color: #8B3A5A;">Escribir</span> "Saliendo del programa.";
+        <span style="color: #5C1B35;">De Otro Modo</span>:
+            <span style="color: #8B3A5A;">Escribir</span> "Opción no válida.";
+    <span style="color: #5C1B35;">FinSegun</span>
+<span style="color: #AD9348;">FinProceso</span>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-xl p-6 md:p-8 my-8 border-t-4 border-uca-primary">
+            <h2 class="text-3xl font-bold text-uca-primary mb-4">Comparación Estratégica: "if-else" vs. "switch"</h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                Como futuro profesional de TIC, es vital elegir la estructura más eficiente para cada escenario. El gráfico de dona ilustra los contextos ideales para cada estructura.
+            </p>
+            <div class="chart-container">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+            <p class="text-center text-gray-600 italic mt-4">
+                Distribución de Casos de Uso Ideales en Diseño Algorítmico.
+            </p>
+        </section>
+
+    </div>
+
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Función para manejar el texto completo en los tooltips
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                const fullLabels = [
+                    ['Lógica Compleja', '(if-else)'],
+                    ['Rangos de Valores', '(if-else)'],
+                    ['Valores Específicos', '(switch)'],
+                    ['Múltiples Casos', 'Discretos (switch)']
+                ];
+                let label = fullLabels[item.dataIndex]; 
+                if (Array.isArray(label)) {
+                  return label.join(' ');
+                } else {
+                  return label;
+                }
+            };
+
+            const chartColors = {
+                primary: '#5c1b35', // UCA Primary (Guinda)
+                secondary: '#ad9348', // UCA Secondary (Dorado)
+                contrast1: '#8b3a5a', // Lighter Guinda
+                contrast2: '#4a4a4a' // Dark Gray Neutral
+            };
+
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            // Labels simplificados para la leyenda (para evitar truncamiento)
+            const simpleLabels = [
+                'Lógica (if-else)',
+                'Rangos (if-else)',
+                'Valores (switch)',
+                'Múltiples (switch)'
+            ];
+            
+            const data = {
+                labels: simpleLabels,
+                datasets: [{
+                    label: 'Casos de Uso Ideales',
+                    data: [25, 25, 25, 25],
+                    backgroundColor: [
+                        chartColors.primary, 
+                        chartColors.contrast1, 
+                        chartColors.secondary, 
+                        chartColors.contrast2  
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            };
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    family: "'Inter', sans-serif"
+                                },
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            },
+                            titleFont: {
+                                size: 16,
+                                family: "'Inter', sans-serif",
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14,
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        })();
+    </script>
+
+</body>
+</html>
