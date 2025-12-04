@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficios del Diseño Modular en Programación</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Configuración Tailwind UNRC -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uca-primary': '#5c1b35', // Guinda Oscuro
+                        'uca-secondary': '#ad9348', // Dorado
+                        'uca-light': '#fefcf8', // Blanco/Crema Muy Claro
+                        'uca-beige': '#f0e8d9', // Beige de Fondo
+                        'uca-guinda-light': '#8b3a5a' // Guinda Intermedio
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 
+        PALETA SELECCIONADA: "UNRC Institucional"
+        Primary Accent (Modular/Success): uca-primary (#5c1b35 - Guinda)
+        Secondary Accent (Monolithic/Warning): uca-secondary (#ad9348 - Dorado)
+    -->
+
+    <style>
+        /* Custom Chart Container Styles based on requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; 
+            max-height: 450px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; 
+            }
+        }
+
+        /* Utilidad para el diseño sin SVG */
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .flow-step {
+            min-width: 150px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+</head>
+<body id="top" class="bg-uca-beige font-sans text-gray-800 antialiased">
+    <!-- NO SVG, NO MERMAID JS USED -->
+
+    <!-- Header / Sticky Navigation (ADAPTADO) -->
+    <header class="bg-uca-light shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="imagenes/cintilloUNRC.png" 
+                    alt="Logo Universidad Rosario Castellanos" 
+                    class="h-10 w-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x40/5c1b35/ad9348?text=UNRC+Logo';"
+                >
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-uca-primary text-center px-4 py-2 rounded-lg">
+                Beneficios del Diseño Modular
+            </h1>
+            
+            <!-- Botón de Acción Inicio (Guinda) -->
+            <a href="index.html" class="bg-uca-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
+                Inicio
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- 1. Introduction: Divide and Conquer -->
+        <section id="intro" class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-white rounded-xl shadow-xl p-8 border-t-4 border-uca-primary">
+            <div class="space-y-6">
+                <div class="inline-block px-3 py-1 rounded-full bg-uca-primary/10 border border-uca-primary text-uca-primary text-xs font-bold tracking-wider uppercase">
+                    Lógica de Programación Módulo 4
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
+                    El Principio de la Ingeniería: <span class="text-uca-secondary">Divide y Vencerás</span>
+                </h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    El diseño modular es la técnica fundamental para la <strong>reutilización de código</strong> y la gestión de la <strong>complejidad</strong>. Consiste en descomponer un problema grande en subproblemas más pequeños e independientes, llamados <strong>módulos</strong>, cada uno con una función específica.
+                </p>
+                <p class="text-gray-600 italic">
+                    Un sistema bien diseñado se compone de módulos discretos (funciones o procedimientos) que se comunican de manera clara y controlada.
+                </p>
+            </div>
+            
+            <!-- Visual Metaphor (HTML/CSS) - NO SVG -->
+            <div class="bg-uca-light p-8 rounded-xl card-shadow relative overflow-hidden">
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="col-span-2 bg-uca-primary/10 p-4 rounded-lg mb-4 border border-uca-primary/50">
+                        <div class="text-2xl mb-2 text-uca-primary">🧩</div>
+                        <h3 class="font-bold text-uca-primary">Problema Mayor</h3>
+                    </div>
+                    <div class="text-uca-secondary text-2xl col-span-2 font-bold">↓</div>
+                    <div class="bg-white p-4 rounded-lg border border-uca-secondary/50 shadow-sm hover:shadow-md transition">
+                        <div class="text-xl mb-1 text-uca-secondary">⚙️</div>
+                        <h4 class="font-bold text-gray-800">Módulo A</h4>
+                        <p class="text-xs text-gray-500">Encapsulación</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-uca-guinda-light/50 shadow-sm hover:shadow-md transition">
+                        <div class="text-xl mb-1 text-uca-guinda-light">📊</div>
+                        <h4 class="font-bold text-gray-800">Módulo B</h4>
+                        <p class="text-xs text-gray-500">Reutilizable</p>
+                    </div>
+                </div>
+                <!-- Instructive Diagram Placement -->
+                <div class="mt-8 text-center text-sm text-gray-600">
+                    [Image of Diagrama de Flujo Modular]
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Impact Comparison (Chart.js Bar) -->
+        <section id="impact" class="bg-uca-light rounded-3xl p-10 card-shadow border-t-4 border-uca-secondary">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-uca-primary mb-4">Métricas de Rendimiento: Modular vs. Monolítico</h3>
+                <p class="text-gray-700">
+                    La comparación directa de métricas clave demuestra por qué el diseño modular es la mejor práctica para proyectos a largo plazo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-uca-primary/10 text-uca-primary flex items-center justify-center font-bold text-lg border-2 border-uca-primary/50">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Mantenibilidad Superior</h4>
+                            <p class="text-gray-600 text-sm">Los cambios o correcciones se limitan al módulo defectuoso, previniendo la propagación de errores ("efectos colaterales").</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-uca-secondary/10 text-uca-secondary flex items-center justify-center font-bold text-lg border-2 border-uca-secondary/50">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Reutilización Garantizada</h4>
+                            <p class="text-gray-600 text-sm">Una función bien diseñada es una <strong>caja negra</strong> que puede ser importada y usada por cualquier parte del código o proyecto, sin conocer su implementación interna.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-uca-guinda-light/10 text-uca-guinda-light flex items-center justify-center font-bold text-lg border-2 border-uca-guinda-light/50">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Organización Lógica</h4>
+                            <p class="text-gray-600 text-sm">Mejora la legibilidad y permite el desarrollo en paralelo por equipos grandes, ya que los desarrolladores no pisan el código de los demás.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Functions vs Procedures (Grid Cards) -->
+        <section class="space-y-6">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-uca-primary">Herramientas: Funciones y Procedimientos</h3>
+                <p class="text-gray-600 mt-2">Los bloques de construcción esenciales para el diseño modular.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Functions Card -->
+                <div class="bg-uca-light p-6 rounded-xl card-shadow border border-uca-primary/20 hover:shadow-lg transition duration-300">
+                    <div class="flex justify-between items-start mb-4 border-b pb-2 border-uca-primary/30">
+                        <h4 class="text-2xl font-bold text-uca-primary">Funciones</h4>
+                        <span class="text-3xl text-uca-primary">𝑓(x)</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center"><span class="text-uca-primary mr-2">●</span> <strong>Devuelven</strong> obligatoriamente un valor.</li>
+                        <li class="flex items-center"><span class="text-uca-primary mr-2">●</span> Se usan en expresiones: `y = f(x) * 2`.</li>
+                        <li class="flex items-center"><span class="text-uca-primary mr-2">●</span> Rol principal: Cálculo y Mapeo de datos.</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-uca-beige/80 rounded font-mono text-sm text-gray-800 border-l-4 border-uca-primary">
+                        area = <span class="text-uca-primary font-semibold">calcularArea</span>(base, altura)
+                    </div>
+                </div>
+
+                <!-- Procedures Card -->
+                <div class="bg-uca-light p-6 rounded-xl card-shadow border border-uca-secondary/20 hover:shadow-lg transition duration-300">
+                    <div class="flex justify-between items-start mb-4 border-b pb-2 border-uca-secondary/30">
+                        <h4 class="text-2xl font-bold text-uca-secondary">Procedimientos</h4>
+                        <span class="text-3xl text-uca-secondary">⚡</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center"><span class="text-uca-secondary mr-2">●</span> <strong>No devuelven</strong> valor (void o nulo).</li>
+                        <li class="flex items-center"><span class="text-uca-secondary mr-2">●</span> Se invocan como instrucciones directas.</li>
+                        <li class="flex items-center"><span class="text-uca-secondary mr-2">●</span> Rol principal: Ejecución de acciones (I/O, imprimir, guardar).</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-uca-beige/80 rounded font-mono text-sm text-gray-800 border-l-4 border-uca-secondary">
+                        <span class="text-uca-secondary font-semibold">imprimirReporte</span>(datos)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Quality Metrics: Coupling vs Cohesion (Chart.js Scatter) -->
+        <section id="quality" class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-10 bg-uca-light rounded-3xl card-shadow border-t-4 border-uca-guinda-light">
+            <div class="lg:col-span-1 space-y-4">
+                <h3 class="text-3xl font-bold text-uca-primary">Criterios de Calidad Modular</h3>
+                <p class="text-gray-700">El diseño óptimo busca el equilibrio entre dos fuerzas opuestas:</p>
+                <div class="p-4 bg-red-100 border-l-4 border-uca-secondary rounded-md">
+                    <h5 class="font-bold text-gray-900">Acoplamiento (Coupling) - Bajo es Mejor</h5>
+                    <p class="text-sm text-gray-700">Indica cuán dependiente es un módulo de otros. El alto acoplamiento dificulta las pruebas y el mantenimiento.</p>
+                </div>
+                <div class="p-4 bg-green-100 border-l-4 border-emerald-500 rounded-md">
+                    <h5 class="font-bold text-gray-900">Cohesión (Cohesion) - Alto es Mejor</h5>
+                    <p class="text-sm text-gray-700">Indica cuán enfocadas están las responsabilidades internas de un módulo. Un módulo cohesivo es fácil de entender y reutilizar.</p>
+                </div>
+                <p class="text-xs text-gray-500 italic mt-4">
+                    La meta de la ingeniería de software es concentrar los módulos en la esquina superior izquierda (Alta Cohesión, Bajo Acoplamiento).
+                </p>
+            </div>
+            
+            <div class="lg:col-span-2 bg-white rounded-xl p-4 card-shadow">
+                <div class="chart-container">
+                    <canvas id="qualityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 3D Complexity Analysis (Plotly WebGL) -->
+        <section class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xl">
+            <div class="p-6 border-b border-gray-200 flex flex-col md:flex-row justify-between items-center bg-uca-light">
+                <div>
+                    <h3 class="text-2xl font-bold text-uca-primary">Análisis Multidimensional de Módulos</h3>
+                    <p class="text-gray-600 text-sm">Visualización de 60 módulos según su Complejidad, Reusabilidad y Mantenibilidad.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3 text-xs font-medium">
+                    <span class="px-2 py-1 bg-uca-primary/10 text-uca-primary rounded-full">X: Complejidad</span>
+                    <span class="px-2 py-1 bg-uca-secondary/10 text-uca-secondary rounded-full">Y: Reusabilidad</span>
+                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-full">Z: Mantenibilidad</span>
+                </div>
+            </div>
+            <div id="plotlyDiv" class="w-full h-[500px] bg-white"></div>
+        </section>
+
+        <!-- 6. Scope Visualization (Nested HTML) -->
+        <section id="scope">
+            <h3 class="text-3xl font-bold text-uca-primary text-center mb-10">Ámbito de Variables y Transferencia de Parámetros</h3>
+            
+            <!-- Global vs Local Scope -->
+            <div class="relative max-w-4xl mx-auto p-10 bg-uca-light rounded-2xl border-2 border-dashed border-uca-secondary card-shadow">
+                <!-- Global Scope -->
+                <div class="absolute -top-3 left-6 font-mono text-gray-500 font-bold text-xs bg-uca-light px-2 rounded">PROGRAMA PRINCIPAL (GLOBAL)</div>
+                <div class="mb-8 mt-4 flex items-center space-x-2">
+                    <span class="w-3 h-3 bg-uca-secondary rounded-full"></span>
+                    <span class="font-mono text-uca-secondary font-semibold">var_total_ventas = 5000</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Local Scope A -->
+                    <div class="bg-white p-6 rounded-xl border border-uca-primary/40 relative card-shadow">
+                        <div class="absolute -top-3 left-4 bg-white px-2 text-uca-primary font-bold text-sm border border-uca-primary/40 rounded">MODULO CALCULAR_IMPUESTO</div>
+                        <p class="text-gray-700 text-sm mb-4">Puede acceder a <span class="text-uca-secondary">var_total_ventas</span>.</p>
+                        <div class="font-mono text-uca-guinda-light text-sm border-l-2 border-uca-primary pl-2">
+                            var impuesto_local = 0.16
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-semibold">La variable <strong>impuesto_local</strong> no existe fuera del módulo.</p>
+                    </div>
+
+                    <!-- Local Scope B -->
+                    <div class="bg-white p-6 rounded-xl border border-uca-primary/40 relative card-shadow">
+                        <div class="absolute -top-3 left-4 bg-white px-2 text-uca-primary font-bold text-sm border border-uca-primary/40 rounded">MODULO GENERAR_REPORTE</div>
+                        <p class="text-gray-700 text-sm mb-4">Puede acceder a <span class="text-uca-secondary">var_total_ventas</span>.</p>
+                        <div class="font-mono text-uca-guinda-light text-sm border-l-2 border-uca-primary pl-2">
+                            var fecha_actual = "2023-12-03"
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-semibold">El módulo de impuesto no puede ver <strong>fecha_actual</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parameter Passing -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <!-- Parameters: By Value -->
+                <div class="bg-uca-light p-6 rounded-xl card-shadow border border-gray-200">
+                    <h4 class="font-bold text-uca-primary text-lg mb-4 border-b border-gray-200 pb-2 flex items-center">Paso de Parámetros por Valor <span class="text-sm text-gray-500 ml-3">(Copia Segura)</span></h4>
+                    <div class="flex items-center justify-between text-center">
+                        <div class="bg-uca-primary/10 p-3 rounded text-uca-primary font-semibold border border-uca-primary/50">
+                            <div class="text-xs uppercase">Original (A)</div>
+                            <div class="font-bold text-2xl">42</div>
+                        </div>
+                        <div class="text-4xl text-gray-400">→</div>
+                        <div class="bg-uca-beige p-2 rounded text-xs text-gray-600 font-medium">COPIA EN MEMORIA</div>
+                        <div class="text-4xl text-gray-400">→</div>
+                        <div class="bg-uca-primary/10 p-3 rounded text-uca-primary font-semibold border border-uca-primary/50">
+                            <div class="text-xs uppercase">Función (B)</div>
+                            <div class="font-bold text-2xl">42</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4 text-center"><strong>Seguridad:</strong> Modificar 'B' no afecta a 'A'. Típico de tipos de datos primitivos (números, booleanos).</p>
+                </div>
+
+                <!-- Parameters: By Reference -->
+                <div class="bg-uca-light p-6 rounded-xl card-shadow border border-gray-200">
+                    <h4 class="font-bold text-uca-primary text-lg mb-4 border-b border-gray-200 pb-2 flex items-center">Paso de Parámetros por Referencia <span class="text-sm text-gray-500 ml-3">(Riesgo Controlado)</span></h4>
+                    <div class="flex items-center justify-between text-center">
+                        <div class="bg-uca-secondary/10 p-3 rounded text-uca-secondary font-semibold border border-uca-secondary/50">
+                            <div class="text-xs uppercase">Original (A)</div>
+                            <div class="font-bold text-2xl">[Obj]</div>
+                        </div>
+                        <div class="text-4xl text-uca-secondary">↔</div>
+                        <div class="bg-uca-beige p-2 rounded text-xs text-gray-600 font-medium">MISMA DIRECCIÓN</div>
+                        <div class="text-4xl text-uca-secondary">↔</div>
+                        <div class="bg-uca-secondary/10 p-3 rounded text-uca-secondary font-semibold border border-uca-secondary/50">
+                            <div class="text-xs uppercase">Función (B)</div>
+                            <div class="font-bold text-2xl">[Obj]</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4 text-center"><strong>Efecto Colateral:</strong> Modificar 'B' <strong>SÍ</strong> afecta a 'A'. Típico de objetos y arrays.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer (Exact match to user's reference) -->
+    <footer class="bg-uca-primary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-uca-light text-sm">
+                Material de índole didáctico para la Universidad Nacional Rosario Castellanos
+            </p>
+            <p class="text-uca-light text-xs mt-2 opacity-75">
+                Licenciatura en Tecnologías de la Información y la Comunicación
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- UTILITY: WRAP LABELS ---
+        function wrapLabel(str, maxLen = 16) {
+            if (str.length <= maxLen) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- CHART CONFIG & COLORS ---
+        const chartColors = {
+            primary: '#5c1b35', // UCA Primary (Guinda)
+            secondary: '#ad9348', // UCA Secondary (Dorado)
+            danger: '#8b3a5a', // UCA Guinda Light (Riesgo/Contraste)
+            success: '#10b981', // Emerald (Genérico para Buen Resultado)
+            neutral: '#4b5563', // Gray 700
+            background: '#f0e8d9' // UCA Beige
+        };
+
+        Chart.defaults.color = chartColors.neutral;
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        
+        const commonTooltip = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            },
+            backgroundColor: chartColors.primary,
+            titleColor: '#fefcf8',
+            bodyColor: '#fefcf8',
+            borderColor: chartColors.secondary,
+            borderWidth: 1
+        };
+
+        // --- CHART 1: COMPARISON (BAR) ---
+        const ctxComparison = document.getElementById('comparisonChart').getContext('2d');
+        const rawLabelsComparison = ['Tiempo de Depuración', 'Líneas Duplicadas', 'Facilidad de Lectura', 'Escalabilidad', 'Tiempo de Integración'];
+        
+        new Chart(ctxComparison, {
+            type: 'bar',
+            data: {
+                labels: rawLabelsComparison.map(l => wrapLabel(l)),
+                datasets: [
+                    {
+                        label: 'Código Monolítico (Riesgo)',
+                        data: [90, 85, 30, 20, 80],
+                        backgroundColor: chartColors.secondary, // Dorado para advertencia/riesgo
+                        borderColor: chartColors.secondary,
+                        borderWidth: 1,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Código Modular (Eficiencia)',
+                        data: [25, 10, 95, 90, 30],
+                        backgroundColor: chartColors.primary, // Guinda para la mejor opción
+                        borderColor: chartColors.primary,
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: chartColors.neutral } },
+                    tooltip: commonTooltip
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(92, 27, 53, 0.1)' },
+                        title: { display: true, text: 'Puntuación de Eficiencia (0-100)', color: chartColors.neutral }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: chartColors.neutral }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: QUALITY (SCATTER) ---
+        const ctxQuality = document.getElementById('qualityChart').getContext('2d');
+        
+        // Generate random points
+        const badModules = Array.from({length: 15}, () => ({
+            x: Math.random() * 40 + 60, // High Coupling (Bad)
+            y: Math.random() * 40 // Low Cohesion (Bad)
+        }));
+        
+        const goodModules = Array.from({length: 15}, () => ({
+            x: Math.random() * 30 + 5, // Low Coupling (Good)
+            y: Math.random() * 30 + 70 // High Cohesion (Good)
+        }));
+
+        const avgModules = Array.from({length: 10}, () => ({
+            x: Math.random() * 40 + 30, 
+            y: Math.random() * 40 + 30
+        }));
+
+        new Chart(ctxQuality, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Módulo Ideal (Meta)',
+                        data: goodModules,
+                        backgroundColor: chartColors.success, // Emerald 
+                        pointRadius: 8
+                    },
+                    {
+                        label: 'Módulo de Alto Riesgo',
+                        data: badModules,
+                        backgroundColor: chartColors.danger, // Guinda Light
+                        pointRadius: 8
+                    },
+                    {
+                        label: 'Módulo Neutro',
+                        data: avgModules,
+                        backgroundColor: chartColors.secondary, // Dorado
+                        pointRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: chartColors.neutral } },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                return item.dataset.label;
+                            },
+                            label: function(context) {
+                                return `Acoplamiento: ${context.raw.x.toFixed(0)}%, Cohesión: ${context.raw.y.toFixed(0)}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Acoplamiento (Dependencia Externa) %', color: chartColors.neutral },
+                        grid: { color: 'rgba(92, 27, 53, 0.1)' },
+                        ticks: { color: chartColors.neutral },
+                        min: 0, max: 100
+                    },
+                    y: {
+                        title: { display: true, text: 'Cohesión (Enfoque Interno) %', color: chartColors.neutral },
+                        grid: { color: 'rgba(92, 27, 53, 0.1)' },
+                        ticks: { color: chartColors.neutral },
+                        min: 0, max: 100
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: PLOTLY 3D SCATTER (WEBGL) ---
+        const count = 60;
+        const xData = []; // Complexity
+        const yData = []; // Reusability
+        const zData = []; // Maintainability
+        const colors = [];
+
+        for (let i = 0; i < count; i++) {
+            let complexity = Math.random();
+            let reusability = Math.random();
+            let maintainability = 1 - (complexity * 0.7) + (Math.random() * 0.2); 
+            
+            xData.push(complexity);
+            yData.push(reusability);
+            zData.push(maintainability);
+            
+            // Color based on Maintainability (0 = low, 1 = high)
+            colors.push(maintainability);
+        }
+
+        const trace1 = {
+            x: xData,
+            y: yData,
+            z: zData,
+            mode: 'markers',
+            marker: {
+                size: 8,
+                color: colors,
+                colorscale: [[0, chartColors.secondary], [0.5, chartColors.danger], [1, chartColors.primary]], // Custom scale: Dorado -> Guinda Claro -> Guinda Oscuro
+                opacity: 0.8
+            },
+            type: 'scatter3d',
+            hovertemplate: 'Complejidad: %{x:.2f}<br>Reusabilidad: %{y:.2f}<br>Mantenibilidad: %{z:.2f}<extra></extra>'
+        };
+
+        const layout = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            scene: {
+                xaxis: { title: 'Complejidad', backgroundcolor: chartColors.background, gridcolor: '#d1d5db', zerolinecolor: '#9ca3af', titlefont: { color: chartColors.neutral }, tickfont: { color: chartColors.neutral } },
+                yaxis: { title: 'Reusabilidad', backgroundcolor: chartColors.background, gridcolor: '#d1d5db', zerolinecolor: '#9ca3af', titlefont: { color: chartColors.neutral }, tickfont: { color: chartColors.neutral } },
+                zaxis: { title: 'Mantenibilidad', backgroundcolor: chartColors.background, gridcolor: '#d1d5db', zerolinecolor: '#9ca3af', titlefont: { color: chartColors.neutral }, tickfont: { color: chartColors.neutral } },
+                bgcolor: 'white',
+                camera: { up: {x: 0, y: 0, z: 1}, center: {x: 0, y: 0, z: 0}, eye: {x: 1.25, y: 1.25, z: 1.25} }
+            },
+            showlegend: false,
+            font: { color: chartColors.neutral }
+        };
+
+        Plotly.newPlot('plotlyDiv', [trace1], layout, {displayModeBar: false, responsive: true});
+
+    </script>
+</body>
+</html>
